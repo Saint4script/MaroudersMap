@@ -4,7 +4,7 @@
 }
 .svg-wrapper{
   display: flex;
-  background-image: url("back.png");
+  /* background-image: url("back.png"); */
   background-position: 0 0;
   background-size: cover;
   width: 100vw;
@@ -19,4 +19,10 @@ svg{
   position: absolute;
   width: 100%;
   height: 100%;
+}
+.cab {
+  opacity: 0.8;
+}
+#cab-10{
+  display: flex;
 }

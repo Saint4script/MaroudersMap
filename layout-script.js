@@ -39,6 +39,13 @@ function resizeCabs() {
 
 }
 
+$('.cab').click((event) => {
+  // console.log(event.currentTarget);
+  let clickedCab = event.currentTarget;
+  console.log(event.currentTarget.style="opacity: 1")
+  // clickedCab.;
+});
+
 
 $(document).ready(() => {
   resizeCabs();
