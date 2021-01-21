@@ -1,0 +1,133 @@
+.grid-map{
+    display: grid;
+    grid-template-columns: repeat(54, 1fr);
+    grid-template-rows: repeat(32, 1fr);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.placeholder{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.cab-2-place{
+    grid-column-start: 49;
+    grid-column-end: 55;
+    grid-row-start: 1;
+    grid-row-end: 8;
+    background-color: #cfda2f;
+}
+
+.cab-3-place{
+    grid-column-start: 45;
+    grid-column-end: 49;
+    grid-row-start: 4;
+    grid-row-end: 12;
+    background-color: #aab9aa;
+}
+
+.cab-4-place{
+    grid-column-start: 48;
+    grid-column-end: 52;
+    grid-row-start: 12;
+    grid-row-end: 15;
+    background-color: #ffae00;
+}
+
+.cab-5-place{
+    grid-column-start: 31;
+    grid-column-end: 40;
+    grid-row-start: 1;
+    grid-row-end: 13;
+    background-color: #2f40da;
+}
+
+.cab-6-place{
+    grid-column-start: 40;
+    grid-column-end: 44;
+    grid-row-start: 4;
+    grid-row-end: 15;
+    background-color: #2fda2f;
+}
+
+.cab-7-place{
+    grid-column-start: 44;
+    grid-column-end: 49;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background-color: #8ada2f;
+}
+
+.cab-8-place{
+    grid-column-start: 34;
+    grid-column-end: 40;
+    grid-row-start: 12;
+    grid-row-end: 17;
+    background-color: #c79a9a;
+}
+
+.cab-9-place{
+    grid-column-start: 20;
+    grid-column-end: 25;
+    grid-row-start: 15;
+    grid-row-end: 20;
+    background-color: #96de60;
+}
+
+.cab-10-place{
+    grid-column-start: 1;
+    grid-column-end: 31;
+    grid-row-start: 2;
+    grid-row-end: 15;
+    background-color: #e702ec;
+}
+
+.cab-11-place{
+    grid-column-start: 17;
+    grid-column-end: 20;
+    grid-row-start: 15;
+    grid-row-end: 20;
+    background-color: #ffae00;
+}
+
+.cab-12-place{
+    grid-column-start: 1;
+    grid-column-end: 17;
+    grid-row-start: 20;
+    grid-row-end: 33;
+    background-color: #dea11d;
+}
+
+.cab-13-place{
+    grid-column-start: 1;
+    grid-column-end: 9;
+    grid-row-start: 15;
+    grid-row-end: 20;
+    background-color: #db8a8a;
+}
+
+.cab-14-place{
+    grid-column-start: 9;
+    grid-column-end: 17;
+    grid-row-start: 15;
+    grid-row-end: 20;
+    background-color: #5d3960;
+}
+
+.cab-15-place{
+    grid-column-start: 17;
+    grid-column-end: 31;
+    grid-row-start: 22;
+    grid-row-end: 33;
+    background-color: #011d0d;
+}
+
+.cab-16-place{
+    grid-column-start: 31;
+    grid-column-end: 41;
+    grid-row-start: 20;
+    grid-row-end: 33;
+    background-color: #ce99d9;
+}
