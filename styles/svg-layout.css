@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: auto;
+    box-sizing: border-box;
 }
 .floor-4-wrapper{
   width: 100vw;
