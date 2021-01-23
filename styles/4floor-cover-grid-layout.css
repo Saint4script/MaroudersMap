@@ -17,8 +17,72 @@
     padding: 0.5em;
     justify-content: center;
     align-items: center;
+    /* opacity: 0; */
+}
+.person-icon{
+  background-color: black;
+  height: 30px; 
+  width: 30px; 
+  border-radius: 50%; 
+  margin: 0.2em;
+  left: auto;
 }
 
+.checkpoint{
+  width: 100%;
+  height: 100%;
+  background-color: darkslateblue;
+  border-radius: 50%;
+  z-index: 2;
+}
+.checkPoint-1{
+  grid-column-start: 22;
+  grid-column-end: 24;
+  grid-row-start: 21;
+  grid-row-end: 23;
+}
+.checkPoint-2{
+  grid-column-start: 27;
+  grid-column-end: 29;
+  grid-row-start: 20;
+  grid-row-end: 22;
+}
+.checkPoint-3{
+  grid-column-start: 30;
+  grid-column-end: 32;
+  grid-row-start: 18;
+  grid-row-end: 20;
+}
+.checkPoint-4{
+  grid-column-start: 22;
+  grid-column-end: 24;
+  grid-row-start: 19;
+  grid-row-end: 21;
+}
+.checkPoint-5{
+  grid-column-start: 34;
+  grid-column-end: 36;
+  grid-row-start: 19;
+  grid-row-end: 21;
+}
+.checkPoint-6{
+  grid-column-start: 34;
+  grid-column-end: 36;
+  grid-row-start: 17;
+  grid-row-end: 19;
+}
+.checkPoint-6{
+  grid-column-start: 36;
+  grid-column-end: 38;
+  grid-row-start: 16;
+  grid-row-end: 18;
+}
+.checkPoint-6{
+  grid-column-start: 36;
+  grid-column-end: 38;
+  grid-row-start: 16;
+  grid-row-end: 18;
+}
 .cab-1-place{
   display: grid;
   grid-template-columns: repeat(30, 1fr);
@@ -38,7 +102,7 @@
   grid-column-end: 10;
   grid-row-start: 1;
   grid-row-end: 6;
-  background-color: tan;
+  /* background-color: tan; */
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -48,7 +112,7 @@
   grid-column-end: 31;
   grid-row-start: 1;
   grid-row-end: 6;
-  background-color: tan;
+  /* background-color: tan; */
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -58,7 +122,7 @@
     grid-column-end: 55;
     grid-row-start: 1;
     grid-row-end: 8;
-    background-color: #cfda2f;
+    /* background-color: #cfda2f; */
 }
 
 .cab-3-place{
@@ -66,7 +130,7 @@
     grid-column-end: 49;
     grid-row-start: 4;
     grid-row-end: 12;
-    background-color: #aab9aa;
+    /* background-color: #aab9aa; */
 }
 
 .cab-4-place{
@@ -74,7 +138,7 @@
     grid-column-end: 52;
     grid-row-start: 12;
     grid-row-end: 15;
-    background-color: #ffae00;
+    /* background-color: #ffae00; */
 }
 
 .cab-5-place{
@@ -82,7 +146,7 @@
     grid-column-end: 40;
     grid-row-start: 1;
     grid-row-end: 12;
-    background-color: #2f40da;
+    /* background-color: #2f40da; */
 }
 
 .cab-6-place{
@@ -90,7 +154,7 @@
     grid-column-end: 44;
     grid-row-start: 4;
     grid-row-end: 15;
-    background-color: #2fda2f;
+    /* background-color: #2fda2f; */
 }
 
 .cab-7-place{
@@ -98,7 +162,7 @@
     grid-column-end: 49;
     grid-row-start: 1;
     grid-row-end: 4;
-    background-color: #8ada2f;
+    /* background-color: #8ada2f; */
 }
 
 .cab-8-place{
@@ -106,7 +170,7 @@
     grid-column-end: 40;
     grid-row-start: 12;
     grid-row-end: 17;
-    background-color: #c79a9a;
+    /* background-color: #c79a9a; */
 }
 
 .cab-9-place{
@@ -114,7 +178,7 @@
     grid-column-end: 25;
     grid-row-start: 15;
     grid-row-end: 20;
-    background-color: #96de60;
+    /* background-color: #96de60; */
 }
 
 .cab-10-place{
@@ -122,7 +186,7 @@
     grid-column-end: 31;
     grid-row-start: 2;
     grid-row-end: 15;
-    background-color: #e702ec;
+    /* background-color: #e702ec; */
 }
 
 .cab-11-place{
@@ -130,7 +194,7 @@
     grid-column-end: 20;
     grid-row-start: 15;
     grid-row-end: 20;
-    background-color: #ffae00;
+    /* background-color: #ffae00; */
 }
 
 .cab-12-place{
@@ -138,7 +202,7 @@
     grid-column-end: 17;
     grid-row-start: 20;
     grid-row-end: 33;
-    background-color: #dea11d;
+    /* background-color: #dea11d; */
 }
 
 .cab-13-place{
@@ -146,7 +210,7 @@
     grid-column-end: 9;
     grid-row-start: 15;
     grid-row-end: 20;
-    background-color: #db8a8a;
+    /* background-color: #db8a8a; */
 }
 
 .cab-14-place{
@@ -154,7 +218,7 @@
     grid-column-end: 17;
     grid-row-start: 15;
     grid-row-end: 20;
-    background-color: #5d3960;
+    /* background-color: #5d3960; */
 }
 
 .cab-15-place{
@@ -162,7 +226,7 @@
     grid-column-end: 31;
     grid-row-start: 22;
     grid-row-end: 33;
-    background-color: #011d0d;
+    /* background-color: #011d0d; */
 }
 
 .cab-16-place{
@@ -170,5 +234,5 @@
     grid-column-end: 41;
     grid-row-start: 20;
     grid-row-end: 33;
-    background-color: #ce99d9;
+    /* background-color: #ce99d9; */
 }

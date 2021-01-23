@@ -8,6 +8,10 @@
   height: 100vh;
   position: relative;
 }
+body{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 
 
 .svg-wrapper{
@@ -23,7 +27,6 @@ svg{
     left: 0;
     right: 0;
     bottom: 0;
-    /* position: relative; */
     width: 100%;
     height: 100%;
 }

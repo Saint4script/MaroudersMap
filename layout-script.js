@@ -1,6 +1,4 @@
-
 class Cabinet {
-
     constructor(cab, params) {
         this.cab = cab;
         this.params = params;
@@ -10,6 +8,7 @@ class Cabinet {
 let wid = 1280;
 let hei = 688;
 
+let checkPoints = []
 let cabTest = []
 cabTest.push($("#cab-1")[0]);
 cabTest.push($("#cab-2")[0]);
@@ -46,7 +45,6 @@ for (let i = 0; i < cabTest.length; i++) {
 function resizeCabs() {
     // clientWidth = document.documentElement.clientWidth; //1280
     // clientHeight = document.documentElement.clientHeight; //688
-
 
     let level_4_svg_wapper_width = $(".svg-wrapper").width();
     let level_4_svg_wapper_height = $(".svg-wrapper").height();
@@ -94,15 +92,55 @@ function resizeCabs() {
             tmpCab.cab.points[j].y = tmpCab.params[j][1] * level_4_svg_wapper_height;
         }
     }
-
 }
 
-$('.cab').click((event) => {
-    let clickedCab = event.currentTarget;
-    console.log(event.currentTarget.style="opacity: 1")
+$('.checkpoint').click((event) => {
+    console.log("f")
 });
 
+
+// input: HTML-element, HTML-element
+function getDistance(obj1, obj2) {
+        let objSize = obj1.getBoundingClientRect();
+        let objSizeNext = obj2.getBoundingClientRect();
+        return Math.sqrt(
+            (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
+            (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
+}
+
+function getClosestCheckpoint() {
+    let closestCheckpoint;
+    for(let i = 0; i < checkPoints.length; i++) {
+        let currCheckpoint = checkPoints[i];
+        let currCheckpointNext = checkPoints[i+1];
+        let currDist = getDistance(currCheckpoint, currCheckpointNext);
+        for(let j = 0; j < checkPoints.length; j++ ) {
+            let tmpCheckpoint = checkPoints[j];
+            let dist = getDistance(currCheckpoint, tmpCheckpoint);
+            if( dist <= currDist) {
+                closestCheckpoint = tmpCheckpoint;
+            }
+        }
+    }
+    return closestCheckpoint;
+}
+
+
 $('.placeholder').click((event) => {
+
+    // for(let i = 0; i < checkPoints.length; i++) {
+    //     let closestCheckpoint;
+    //     let currCheckpoint = checkPoints[i];
+    //     let currCheckpointNext = checkPoints[i+1];
+    //     let currDist = getDistance(currCheckpoint, currCheckpointNext);
+    //     for(let j = 0; j < checkPoints.length; j++ ) {
+    //         let tmpCheckpoint = checkPoints[j];
+    //         let dist = getDistance(currCheckpoint, tmpCheckpoint);
+    //         if( dist <= currDist) {
+    //             closestCheckpoint = tmpCheckpoint;
+    //         }
+    //     }
+    // }
 
   let curPlace = event.currentTarget;
   // condition for KORIDOR PARADNAYA PRIHOZHAYA
@@ -113,24 +151,45 @@ $('.placeholder').click((event) => {
 
     let person = document.createElement('div');
     person.setAttribute("class", "person-icon");
-    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
+    person.setAttribute("id", "person-icon1");
 
     if(child1.children.length >= child2.children.length){
       child2.appendChild(person);
     } else {
       child1.appendChild(person);
     }
-    
+
   } else {
     let person = document.createElement('div');
     person.setAttribute("class", "person-icon");
-    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
-  
+
     curPlace.appendChild(person);
   }
+
+  $(".person-icon").on("click", (event) => {
+        event.stopPropagation(false);
+        let me = event.currentTarget;
+
+        let size = me.getBoundingClientRect();
+        let distX = size.x;
+        let stepX = 50;
+        let distY = size.y;
+        let stepY = 50;
+
+        console.log("dist: " + distX);
+        size.x = size.x + stepX;
+        size.y = size.y + stepY;
+        me.style+=`position: absolute; ; transition: 1s ease-out; transform: translate(${distX + stepX}px, ${distY + stepY}px)`;
+
+        event.stopPropagation(true);
+        
+  });
 });
 
+
+
 $(document).ready(() => {
+    checkPoints = $(".grid-map").children(".checkpoint");
     resizeCabs();
 })
 
