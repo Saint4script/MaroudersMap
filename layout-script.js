@@ -1,14 +1,25 @@
+// Необходимые классы
 class Cabinet {
+
     constructor(cab, params) {
         this.cab = cab;
         this.params = params;
     }
 }
 
-let wid = 1280;
-let hei = 688;
+class Image {
 
-let checkPoints = []
+    constructor(img, koeffs) {
+        this.img = img;
+        this.koeffs = koeffs;
+    }
+}
+
+// Константы, необходимые для вычесления коэффицентов пропорций
+const wid = 1280;
+const hei = 688;
+
+
 let cabTest = []
 cabTest.push($("#cab-1")[0]);
 cabTest.push($("#cab-2")[0]);
@@ -25,7 +36,7 @@ cabTest.push($("#cab-12")[0]);
 cabTest.push($("#cab-13")[0]);
 cabTest.push($("#cab-14")[0]);
 cabTest.push($("#cab-15")[0]);
-cabTest.push($("#cab-16")[0]);
+//cabTest.push($("#cab-16")[0]);
 
 
 let allKoeffs =[];
@@ -41,15 +52,62 @@ for (let i = 0; i < cabTest.length; i++) {
     allKoeffs.push(koeffs)
 }
 
+//======================================================
+
+let imageArray = [];
+imageArray.push($("#16cab-image")[0].attributes)
+/*// opacity test
+imageArray.push($("#17cab-image")[0].attributes)*/
+
+
+let imageKoeffs = []
+for (let i = 0; i < imageArray.length; i++) {
+    let localKoeffs = []
+
+    let curX = imageArray[i][0].value;
+    let curY = imageArray[i][1].value;
+    let curWidth = imageArray[i][4].value;
+    let curHeight = imageArray[i][5].value;
+
+    localKoeffs.push(Number(curX) / wid);
+    localKoeffs.push(Number(curY) / hei); /// первая точка начало верхний-левый угол
+
+    localKoeffs.push((Number(curWidth) ) / wid); // width
+    localKoeffs.push(Number(curHeight) / hei);  // right up corner
+
+    imageKoeffs.push(localKoeffs)
+}
+
 
 function resizeCabs() {
+
+
     // clientWidth = document.documentElement.clientWidth; //1280
     // clientHeight = document.documentElement.clientHeight; //688
 
     let level_4_svg_wapper_width = $(".svg-wrapper").width();
     let level_4_svg_wapper_height = $(".svg-wrapper").height();
-    let cabs = []
 
+
+    let images = []
+    let img_16 = new Image(imageArray[0], imageKoeffs[0]);
+    images.push(img_16);
+
+    /*let img_17 = new Image(imageArray[1], imageKoeffs[1]);
+    images.push(img_17);*/
+
+
+
+    for (let i = 0; i < images.length; i++) {
+        let currentIMG = images[i];
+
+        currentIMG.img[0].value = currentIMG.koeffs[0] * level_4_svg_wapper_width;
+        currentIMG.img[1].value = currentIMG.koeffs[1] * level_4_svg_wapper_height;
+        currentIMG.img[4].value = currentIMG.koeffs[2] * level_4_svg_wapper_width;
+        currentIMG.img[5].value = currentIMG.koeffs[3] * level_4_svg_wapper_height;
+    }
+
+    let cabs = []
     let cab_1  = new Cabinet(cabTest[0], allKoeffs[0]);
     let cab_2  = new Cabinet(cabTest[1], allKoeffs[1]);
     let cab_3  = new Cabinet(cabTest[2], allKoeffs[2]);
@@ -65,7 +123,7 @@ function resizeCabs() {
     let cab_13 = new Cabinet(cabTest[12], allKoeffs[12]);
     let cab_14 = new Cabinet(cabTest[13], allKoeffs[13]);
     let cab_15 = new Cabinet(cabTest[14], allKoeffs[14]);
-    let cab_16 = new Cabinet(cabTest[15], allKoeffs[15]);
+    //let cab_16 = new Cabinet(cabTest[15], allKoeffs[15]);
 
     cabs.push(cab_1);
     cabs.push(cab_2);
@@ -82,7 +140,7 @@ function resizeCabs() {
     cabs.push(cab_13);
     cabs.push(cab_14);
     cabs.push(cab_15);
-    cabs.push(cab_16);
+    //cabs.push(cab_16);
 
     for(let i = 0; i < cabs.length; i++) {
         let tmpCab = cabs[i];
@@ -92,55 +150,15 @@ function resizeCabs() {
             tmpCab.cab.points[j].y = tmpCab.params[j][1] * level_4_svg_wapper_height;
         }
     }
+
 }
 
-$('.checkpoint').click((event) => {
-    console.log("f")
-});
-
-
-// input: HTML-element, HTML-element
-function getDistance(obj1, obj2) {
-        let objSize = obj1.getBoundingClientRect();
-        let objSizeNext = obj2.getBoundingClientRect();
-        return Math.sqrt(
-            (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
-            (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
-}
-
-function getClosestCheckpoint() {
-    let closestCheckpoint;
-    for(let i = 0; i < checkPoints.length; i++) {
-        let currCheckpoint = checkPoints[i];
-        let currCheckpointNext = checkPoints[i+1];
-        let currDist = getDistance(currCheckpoint, currCheckpointNext);
-        for(let j = 0; j < checkPoints.length; j++ ) {
-            let tmpCheckpoint = checkPoints[j];
-            let dist = getDistance(currCheckpoint, tmpCheckpoint);
-            if( dist <= currDist) {
-                closestCheckpoint = tmpCheckpoint;
-            }
-        }
-    }
-    return closestCheckpoint;
-}
-
+/*$('.cab').click((event) => {
+    let clickedCab = event.currentTarget;
+    console.log(event.currentTarget.style="opacity: 1")
+});*/
 
 $('.placeholder').click((event) => {
-
-    // for(let i = 0; i < checkPoints.length; i++) {
-    //     let closestCheckpoint;
-    //     let currCheckpoint = checkPoints[i];
-    //     let currCheckpointNext = checkPoints[i+1];
-    //     let currDist = getDistance(currCheckpoint, currCheckpointNext);
-    //     for(let j = 0; j < checkPoints.length; j++ ) {
-    //         let tmpCheckpoint = checkPoints[j];
-    //         let dist = getDistance(currCheckpoint, tmpCheckpoint);
-    //         if( dist <= currDist) {
-    //             closestCheckpoint = tmpCheckpoint;
-    //         }
-    //     }
-    // }
 
   let curPlace = event.currentTarget;
   // condition for KORIDOR PARADNAYA PRIHOZHAYA
@@ -151,45 +169,24 @@ $('.placeholder').click((event) => {
 
     let person = document.createElement('div');
     person.setAttribute("class", "person-icon");
-    person.setAttribute("id", "person-icon1");
+    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
 
     if(child1.children.length >= child2.children.length){
       child2.appendChild(person);
     } else {
       child1.appendChild(person);
     }
-
+    
   } else {
     let person = document.createElement('div');
     person.setAttribute("class", "person-icon");
-
+    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
+  
     curPlace.appendChild(person);
   }
-
-  $(".person-icon").on("click", (event) => {
-        event.stopPropagation(false);
-        let me = event.currentTarget;
-
-        let size = me.getBoundingClientRect();
-        let distX = size.x;
-        let stepX = 50;
-        let distY = size.y;
-        let stepY = 50;
-
-        console.log("dist: " + distX);
-        size.x = size.x + stepX;
-        size.y = size.y + stepY;
-        me.style+=`position: absolute; ; transition: 1s ease-out; transform: translate(${distX + stepX}px, ${distY + stepY}px)`;
-
-        event.stopPropagation(true);
-        
-  });
 });
 
-
-
 $(document).ready(() => {
-    checkPoints = $(".grid-map").children(".checkpoint");
     resizeCabs();
 })
 
