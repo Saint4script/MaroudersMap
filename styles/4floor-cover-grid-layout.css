@@ -17,6 +17,7 @@
     padding: 0.5em;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     /* opacity: 0; */
 }
 .person-icon{
@@ -35,37 +36,37 @@
   border-radius: 50%;
   z-index: 2;
 }
-.checkPoint-1{
+.checkPoint-15{
   grid-column-start: 22;
   grid-column-end: 23;
   grid-row-start: 22;
   grid-row-end: 23;
 }
-.checkPoint-2{
+.checkPoint-101{
   grid-column-start: 27;
   grid-column-end: 28;
   grid-row-start: 20;
   grid-row-end: 21;
 }
-.checkPoint-3{
+.checkPoint-100{
   grid-column-start: 31;
   grid-column-end: 32;
   grid-row-start: 18;
   grid-row-end: 19;
 }
-.checkPoint-4{
+.checkPoint-9{
   grid-column-start: 22;
   grid-column-end: 23;
   grid-row-start: 19;
   grid-row-end: 20;
 }
-.checkPoint-5{
+.checkPoint-16{
   grid-column-start: 35;
   grid-column-end: 36;
   grid-row-start: 20;
   grid-row-end: 21;
 }
-.checkPoint-6{
+.checkPoint-8{
   grid-column-start: 36;
   grid-column-end: 37;
   grid-row-start: 16;
