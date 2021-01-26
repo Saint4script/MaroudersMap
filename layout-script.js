@@ -7,13 +7,6 @@ class Cabinet {
     }
 }
 
-class Image {
-
-    constructor(img, koeffs) {
-        this.img = img;
-        this.koeffs = koeffs;
-    }
-}
 
 // Константы, необходимые для вычесления коэффицентов пропорций
 const wid = 1280;
@@ -36,7 +29,7 @@ cabTest.push($("#cab-12")[0]);
 cabTest.push($("#cab-13")[0]);
 cabTest.push($("#cab-14")[0]);
 cabTest.push($("#cab-15")[0]);
-//cabTest.push($("#cab-16")[0]);
+cabTest.push($("#cab-16")[0]);
 
 
 let allKoeffs =[];
@@ -54,29 +47,8 @@ for (let i = 0; i < cabTest.length; i++) {
 
 //======================================================
 
-let imageArray = [];
-imageArray.push($("#16cab-image")[0].attributes)
-/*// opacity test
-imageArray.push($("#17cab-image")[0].attributes)*/
 
 
-let imageKoeffs = []
-for (let i = 0; i < imageArray.length; i++) {
-    let localKoeffs = []
-
-    let curX = imageArray[i][0].value;
-    let curY = imageArray[i][1].value;
-    let curWidth = imageArray[i][4].value;
-    let curHeight = imageArray[i][5].value;
-
-    localKoeffs.push(Number(curX) / wid);
-    localKoeffs.push(Number(curY) / hei); /// первая точка начало верхний-левый угол
-
-    localKoeffs.push((Number(curWidth) ) / wid); // width
-    localKoeffs.push(Number(curHeight) / hei);  // right up corner
-
-    imageKoeffs.push(localKoeffs)
-}
 
 
 function resizeCabs() {
@@ -89,23 +61,11 @@ function resizeCabs() {
     let level_4_svg_wapper_height = $(".svg-wrapper").height();
 
 
-    let images = []
-    let img_16 = new Image(imageArray[0], imageKoeffs[0]);
-    images.push(img_16);
-
-    /*let img_17 = new Image(imageArray[1], imageKoeffs[1]);
-    images.push(img_17);*/
 
 
 
-    for (let i = 0; i < images.length; i++) {
-        let currentIMG = images[i];
 
-        currentIMG.img[0].value = currentIMG.koeffs[0] * level_4_svg_wapper_width;
-        currentIMG.img[1].value = currentIMG.koeffs[1] * level_4_svg_wapper_height;
-        currentIMG.img[4].value = currentIMG.koeffs[2] * level_4_svg_wapper_width;
-        currentIMG.img[5].value = currentIMG.koeffs[3] * level_4_svg_wapper_height;
-    }
+
 
     let cabs = []
     let cab_1  = new Cabinet(cabTest[0], allKoeffs[0]);
@@ -123,7 +83,7 @@ function resizeCabs() {
     let cab_13 = new Cabinet(cabTest[12], allKoeffs[12]);
     let cab_14 = new Cabinet(cabTest[13], allKoeffs[13]);
     let cab_15 = new Cabinet(cabTest[14], allKoeffs[14]);
-    //let cab_16 = new Cabinet(cabTest[15], allKoeffs[15]);
+    let cab_16 = new Cabinet(cabTest[15], allKoeffs[15]);
 
     cabs.push(cab_1);
     cabs.push(cab_2);
@@ -140,7 +100,7 @@ function resizeCabs() {
     cabs.push(cab_13);
     cabs.push(cab_14);
     cabs.push(cab_15);
-    //cabs.push(cab_16);
+    cabs.push(cab_16);
 
     for(let i = 0; i < cabs.length; i++) {
         let tmpCab = cabs[i];
@@ -153,38 +113,8 @@ function resizeCabs() {
 
 }
 
-/*$('.cab').click((event) => {
-    let clickedCab = event.currentTarget;
-    console.log(event.currentTarget.style="opacity: 1")
-});*/
 
-$('.placeholder').click((event) => {
 
-  let curPlace = event.currentTarget;
-  // condition for KORIDOR PARADNAYA PRIHOZHAYA
-  if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
-
-    let child1 = $('.cab-1-1-place')[0];
-    let child2 = $('.cab-1-2-place')[0];
-
-    let person = document.createElement('div');
-    person.setAttribute("class", "person-icon");
-    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
-
-    if(child1.children.length >= child2.children.length){
-      child2.appendChild(person);
-    } else {
-      child1.appendChild(person);
-    }
-    
-  } else {
-    let person = document.createElement('div');
-    person.setAttribute("class", "person-icon");
-    person.style="background-color: black; height: 30px; width: 30px; border-radius: 50%; margin: 0.5em;"
-  
-    curPlace.appendChild(person);
-  }
-});
 
 $(document).ready(() => {
     resizeCabs();
