@@ -34,3 +34,18 @@ svg{
 .cab {
     opacity: 0.8;
 }
+
+form{
+    z-index: 100;
+    width: 20vw;
+    display: flex;
+    background-color: green;
+    position: fixed;
+}
+form button {
+    width: 50px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    
+}
