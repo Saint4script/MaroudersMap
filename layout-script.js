@@ -1,6 +1,8 @@
 const WID = 1280;// ширина - для отношений с полигонами
 const HEI = 688;// высота
 CABINETS = []
+
+
 let CHECKPOINTS = []
 
 class Cabinet {
@@ -9,6 +11,7 @@ class Cabinet {
     static placeholderToMoveFrom;
     static personEvent;
 
+    /* В данный момент не используется и вряд ли будет
     constructor(cab, coeffs) {
         this.cab = cab;
         this.coeffs = coeffs;
@@ -24,19 +27,19 @@ class Cabinet {
             koeffs.push(currentPair);
         }
         return koeffs
-    }
+    }*/
 }
 
+/* В данный момент не используется и вряд ли будет
 function initCabinets() {
     let cabs = $(".svg-wrapper svg").children();
     for(let i = 0; i < cabs.length; i++) {
         CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
     }
-}
-function initCheckpoints() {
-    CHECKPOINTS = $(".grid-map").children(".checkpoint");
-}
+}*/
 
+
+/* В данный момент не используется и вряд ли будет
 function resizeCabs() {
 
     let level_4_svg_wapper_width = $(".svg-wrapper").width();
@@ -50,7 +53,12 @@ function resizeCabs() {
             tmpCab.cab.points[j].y = tmpCab.coeffs[j][1] * level_4_svg_wapper_height;
         }
     }
+}*/
+
+function initCheckpoints() {
+    CHECKPOINTS = $(".grid-map").children(".checkpoint");
 }
+
 
 // input: HTML-element, HTML-element
 function getDistance(obj1, obj2) {
@@ -251,10 +259,10 @@ $(".move").on("click", (event) => {
 
 $(document).ready(() => {
     initCheckpoints();
-    initCabinets();
-    resizeCabs();
+    /*initCabinets();
+    resizeCabs();*/
 })
 
-window.onresize = function( event ) {
+/*window.onresize = function( event ) {
     resizeCabs();
-};
+};*/

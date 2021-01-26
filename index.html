@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="image/favi.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/svg-layout.css">
     <link rel="stylesheet" href="styles/4floor-cover-grid-layout.css">
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <title>Marodeur`s Map</title>
 </head>
-<body background="perfect.jpg">
+<body background="image/perfect.jpg">
 
+<!--    Основной тег, содержащий в себе все элементы для отрисовки карты 4 этажа офиса компании -->
 <div class="floor-4-wrapper">
+    <!--    Покрывающая сетка: Содержит блоки, внутри которых располагаются маркеры сотрудников при их появлении.
+            Для каждого кабинета свой блок.-->
     <div class="grid-map">
 
+        <div class="cab-1-place ">
+            <div class="cab-1-1-place placeholder"></div>
+            <div class="cab-1-2-place placeholder"></div>
+        </div>
         <div class="cab-2-place placeholder"></div>
         <div class="cab-3-place placeholder"></div>
         <div class="cab-4-place placeholder"></div>
@@ -28,10 +36,6 @@
         <div class="cab-14-place placeholder"></div>
         <div class="cab-15-place placeholder"></div>
         <div class="cab-16-place placeholder"></div>
-        <div class="cab-1-place ">
-          <div class="cab-1-1-place placeholder"></div>
-          <div class="cab-1-2-place placeholder"></div>
-        </div>
 
         <div class="checkPoint-15 checkpoint"></div>
         <div class="checkPoint-9 checkpoint"></div>
@@ -40,52 +44,155 @@
         <div class="checkPoint-100 checkpoint"></div>
         <div class="checkPoint-101 checkpoint"></div>
 
-        
-    </div>
-  
-  <div class="svg-wrapper">
-      <svg>
-          <polygon class="cab" id="cab-10" points="0,0 663,0 663,21 711,21 711,301 0,301" fill="#ff05b4"/> pink
-          <polygon class="cab" id="cab-5"  points="663,0 1019,0 1019,65 925,65 925,237 782,237 782,301 711,301 711,21 663,21" fill="#0341fc"/> blue
-          <polygon class="cab" id="cab-7"  points="1019,0 1138,0 1138,65 1019,65" fill="#ffdd80"/> охра
-          <polygon class="cab" id="cab-2"  points="1138,0 1280,0 1280,301 1210,301 1210,151 1138,151" fill="#ff6f00"/> оранжевый
-          <polygon class="cab" id="cab-6"  points="925,65 1019,65 1019,129 1044,129 1044,301 925,301 925,258" fill="#2aa13c"/> зеленый
-          <polygon class="cab" id="cab-3"  points="1019,65 1138,65 1138,151 1210,151 1210,258 1116,258 1116,301 1044,301 1044,129 1019,129" fill="#8f8f8f"/> серый
-          <polygon class="cab" id="cab-8"  points="782,237 925,237 925,344 782,344" fill="#ffc7c7"/> бежевый
-          <polygon class="cab" id="cab-4"  points="1116,237 1210,237 1210,301 1116,301" fill="#ffb60d"/> горчичный
-          <polygon class="cab" id="cab-13" points="0,301 190,301 190,409 0,409" fill="#ff150d"/> красный
-          <polygon class="cab" id="cab-14" points="190,301 379,301 379,409 190,409" fill="#5e1873"/> фиолетовый
-          <polygon class="cab" id="cab-11" points="379,301 450,301 450,409 379,409" fill="#d9bc9c"/> пэрсик
-          <polygon class="cab" id="cab-9"  points="450,301 569,301 569,409 450,409" fill="#93bd97"/> темно-салатный
-          <polygon class="cab" id="cab-12" points="0,409 450,409 450,452 379,452 379,688 0,688" fill="#bed1c0"/> cеро-салатный
-          <polygon class="cab" id="cab-15" points="379,452 711,452 711,688 379,688" fill="#00630a"/> темно-зеленый
-          <polygon class="cab" id="cab-16" points="711,409 948,409 948,688 711,688" fill="#8a5dde"/> темно-фиолетовый
-
-          <polygon class="cab" id="cab-1" points="450,409 569,409 569,301 782,301 782,344 925,344 925,301 1280,301 1280,409 711,409 711,452 450,452" fill="#f2ff00"/> ЖОЛТЭЙ
-      </svg>
-  </div>  
-  <form>
-    <div class="from">
-        <input type="radio" name="placeFrom" value="cab-8-from"> 
-        <label for="cab-8">cab-8</label>
-        <input type="radio" name="placeFrom" value="cab-9-from">
-        <label for="cab-9">cab-9</label>
-        <input type="radio" name="placeFrom" value="cab-15-from">
-        <label for="cab-15">cab-15</label>
     </div>
 
-    <div class="to">
-        <input type="radio" name="placeTo" value="cab-8-to">
-        <label for="cab-8">cab-8</label>
-        <input type="radio" name="placeTo" value="cab-9-to">
-        <label for="cab-9">cab-9</label>
-        <input type="radio" name="placeTo" value="cab-15-to">
-        <label for="cab-15">cab-15</label>
+    <!--    Построенный макет карты через path, каждая группа выделенная тегом <g> - отдельный кабинет
+            Что позволяет добавить тот или иной элемент svg в конкретный кабинет-->
+    <div class="svg-wrapper">
+        <svg viewbox="0 0 1280 680" preserveAspectRatio="none">
+
+            <g class="cab" id="cab-1">
+                <path d="m 957,400 l 315,0 l 0,-30" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1272, 320 l 0,-33" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1272, 370 l 0,-50" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-2">
+                <path d="m 1225,279 l -15,0 l 0,-121 l -72,0 l 0,-150 l 134,0 l 0,271 l -10,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1258,283 l 0,-30" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-3">
+                <path d="m 1051,279 l 10,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1101,279 l 15,0 l 0,-40 l 86,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1063,283 l 0,-40" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-4">
+                <path d="m 1202,279 l -30,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1172,281 l -48,0" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-5">
+                <path d="m 720,279 l -10,0 l 0,-259 l -47,0 l 0,-12 l 356,0 l 0,13" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1020,61 l -94,0 l 0,160 l -143,0 l 0,57 l -14,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 724,283 l 0,-46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-6">
+                <path d="m 933,279 l 40,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1043,287 l 0,-146 l -23,0 l 0,-73" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1031,285 l 0,-46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-7">
+                <path d="m 1019,15 l 0,-7 l 119,0 l 0,52 l -119,0 l 0,-12" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 1015,48 l 40,0" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-8">
+                <path d="m 782,286 l 0,32 l 70,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 900,318 l 25,0 l 0,-89" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 896,322 l 0,-46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+
+            <g class="cab" id="cab-9">
+                <path d="m 462,419 l -12,0 l 0,-140 l 120,0 l 0,140 l -48,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 466,423 l 0,-46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+
+            <g class="cab" id="cab-10">
+                <path d="m 580,279 l -572,0 l 0,-271 l 655,0 l 0,12 l 47,0 l 0,259 l -70,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 584,275 l 0,58" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-11" >
+                <path d="m 394,400 l -15,0 l 0,-120 l 70,0 l 0,128" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 437,404 l 0,-46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-12">
+                <path d="m 488,481 l -132,0 l 0,191 l -348,0 l 0,-264" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 450,427 l 0,15" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 454,469 l -40,0" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-13">
+                <path d="m 116,400 l -109,0 l 0,-120 l 184,0 l 0,120 l -20,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 168,396 l 0,46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-14">
+                <path d="m 230,400 l -40,0 l 0,-120 l 188,0 l 0,120 l -80,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 234,396 l 0,46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-15">
+                <path d="m 555,481 l 180,0 l 0,193 l -371,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 492,477 l 0,46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+            <g class="cab" id="cab-16">
+                <path d="m 734,473 l 0,-73 l 80,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 870,400 l 79,0 l 0,273 l -206,0" stroke="#c2185b" stroke-width="16" fill="none" />
+                <path d="m 818,396 l 0,46" stroke="#00bfff" stroke-width="8" fill="none" />
+            </g>
+
+        </svg>
     </div>
+
+    <!--    &lt;!&ndash;
+    Временно пусть остаётся, на случай если будут проблемы в использовании svg  &ndash;&gt;
+    <div class="svg-wrapper">
+        <svg>
+            <polygon class="cab" id="cab-10" points="0,0 663,0 663,20 711,20 711,283 0,283" fill="#ff05b4"/> pink
+            <polygon class="cab" id="cab-5"  points="663,0 1019,0 1019,61 925,61 925,223 782,223 782,283 711,283 711,21 663,20" fill="#0341fc"/> blue
+            <polygon class="cab" id="cab-7"  points="1019,0 1138,0 1138,61 1019,61" fill="#ffdd80"/> охра
+            <polygon class="cab" id="cab-2"  points="1138,0 1280,0 1280,283 1210,283 1210,162 1138,162" fill="#ff6f00"/> оранжевый
+            <polygon class="cab" id="cab-6"  points="925,61 1019,61 1019,142 1044,142 1044,283 925,283 925,258" fill="#2aa13c"/> зеленый
+            <polygon class="cab" id="cab-3"  points="1019,61 1138,61 1138,162 1210,162 1210,243 1116,243 1116,283 1044,283 1044,142 1019,142" fill="#8f8f8f" /> серый
+            <polygon class="cab" id="cab-8"  points="782,223 925,223 925,323 782,323" fill="#ffc7c7"/> бежевый
+            <polygon class="cab" id="cab-4"  points="1116,243 1210,243 1210,283 1116,283" fill="#ffb60d"/> горчичный
+
+            <polygon class="cab" id="cab-13" points="0,283 190,283 190,405 0,405" fill="#ff150d"/> красный
+            <polygon class="cab" id="cab-14" points="190,283 379,283 379,405 190,405" fill="#5e1873"/> фиолетовый
+            <polygon class="cab" id="cab-11" points="379,283 450,283 450,405 379,405" fill="#d9bc9c"/> пэрсик
+            <polygon class="cab" id="cab-9"  points="450,283 569,283 569,425 450,425" fill="#93bd97"/> темно-салатный
+
+            <polygon class="cab" id="cab-12" points="0,405 450,405 450,486 356,486 356,688 0,688" fill="#bed1c0"/> cеро-салатный
+            <polygon class="cab" id="cab-15" points="356,486 735,486 735,688 356,688" fill="#00630a"/> темно-зеленый
+            <polygon class="cab" id="cab-16" points="735,405 948,405 948,688 735,688" fill="#8a5dde"/> темно-фиолетовый
+
+            <polygon class="cab" id="cab-1" points="450,425 569,425 569,283 782,283 782,323 924,323 924,283 1280,283
+                                                1280,405 735,405 735,486 450,486" fill="#f2ff00" /> ЖОЛТЭЙ
+        </svg>
+    </div>-->
+
+    <!--    In progress ###..   -->
+    <form>
+        <div class="from">
+            <input type="radio" name="placeFrom" value="cab-8-from">
+            <label for="cab-8">cab-8</label>
+            <input type="radio" name="placeFrom" value="cab-9-from">
+            <label for="cab-9">cab-9</label>
+            <input type="radio" name="placeFrom" value="cab-15-from">
+            <label for="cab-15">cab-15</label>
+        </div>
+
+        <div class="to">
+            <input type="radio" name="placeTo" value="cab-8-to">
+            <label for="cab-8">cab-8</label>
+            <input type="radio" name="placeTo" value="cab-9-to">
+            <label for="cab-9">cab-9</label>
+            <input type="radio" name="placeTo" value="cab-15-to">
+            <label for="cab-15">cab-15</label>
+        </div>
+
     <input type="button" class="move" value="move">
 
-
-</form>
+    </form>
 </div>
 
 
