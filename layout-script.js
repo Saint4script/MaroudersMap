@@ -1,125 +1,268 @@
-// Необходимые классы
+const WID = 1280;// ширина - для отношений с полигонами
+const HEI = 688;// высота
+CABINETS = []
+
+
+let CHECKPOINTS = []
+
 class Cabinet {
+    static destinationChecker = false;
+    static personToMove;
+    static placeholderToMoveFrom;
+    static personEvent;
 
-    constructor(cab, params) {
+    /* В данный момент не используется и вряд ли будет
+    constructor(cab, coeffs) {
         this.cab = cab;
-        this.params = params;
+        this.coeffs = coeffs;
     }
+
+    static getCoeffs(cabinet) {
+        let koeffs =[];
+        for (let j = 0; j < cabinet.points.length; j++) {
+            let currentPair = [];
+    
+            currentPair.push(cabinet.points[j].x / WID);
+            currentPair.push(cabinet.points[j].y / HEI);
+            koeffs.push(currentPair);
+        }
+        return koeffs
+    }*/
 }
 
-
-// Константы, необходимые для вычесления коэффицентов пропорций
-const wid = 1280;
-const hei = 688;
-
-
-let cabTest = []
-cabTest.push($("#cab-1")[0]);
-cabTest.push($("#cab-2")[0]);
-cabTest.push($("#cab-3")[0]);
-cabTest.push($("#cab-4")[0]);
-cabTest.push($("#cab-5")[0]);
-cabTest.push($("#cab-6")[0]);
-cabTest.push($("#cab-7")[0]);
-cabTest.push($("#cab-8")[0]);
-cabTest.push($("#cab-9")[0]);
-cabTest.push($("#cab-10")[0]);
-cabTest.push($("#cab-11")[0]);
-cabTest.push($("#cab-12")[0]);
-cabTest.push($("#cab-13")[0]);
-cabTest.push($("#cab-14")[0]);
-cabTest.push($("#cab-15")[0]);
-cabTest.push($("#cab-16")[0]);
-
-
-let allKoeffs =[];
-for (let i = 0; i < cabTest.length; i++) {
-    let koeffs =[];
-    for (let j = 0; j < cabTest[i].points.length; j++) {
-        let currentPair = [];
-
-        currentPair.push(cabTest[i].points[j].x / wid);
-        currentPair.push(cabTest[i].points[j].y / hei);
-        koeffs.push(currentPair);
+/* В данный момент не используется и вряд ли будет
+function initCabinets() {
+    let cabs = $(".svg-wrapper svg").children();
+    for(let i = 0; i < cabs.length; i++) {
+        CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
     }
-    allKoeffs.push(koeffs)
-}
-
-//======================================================
+}*/
 
 
-
-
-
+/* В данный момент не используется и вряд ли будет
 function resizeCabs() {
-
-
-    // clientWidth = document.documentElement.clientWidth; //1280
-    // clientHeight = document.documentElement.clientHeight; //688
 
     let level_4_svg_wapper_width = $(".svg-wrapper").width();
     let level_4_svg_wapper_height = $(".svg-wrapper").height();
 
+    for(let i = 0; i < CABINETS.length; i++) {
+        let tmpCab = CABINETS[i];
 
-
-
-
-
-
-
-    let cabs = []
-    let cab_1  = new Cabinet(cabTest[0], allKoeffs[0]);
-    let cab_2  = new Cabinet(cabTest[1], allKoeffs[1]);
-    let cab_3  = new Cabinet(cabTest[2], allKoeffs[2]);
-    let cab_4  = new Cabinet(cabTest[3], allKoeffs[3]);
-    let cab_5  = new Cabinet(cabTest[4], allKoeffs[4]);
-    let cab_6  = new Cabinet(cabTest[5], allKoeffs[5]);
-    let cab_7  = new Cabinet(cabTest[6], allKoeffs[6]);
-    let cab_8  = new Cabinet(cabTest[7], allKoeffs[7]);
-    let cab_9  = new Cabinet(cabTest[8], allKoeffs[8]);
-    let cab_10 = new Cabinet(cabTest[9], allKoeffs[9]);
-    let cab_11 = new Cabinet(cabTest[10], allKoeffs[10]);
-    let cab_12 = new Cabinet(cabTest[11], allKoeffs[11]);
-    let cab_13 = new Cabinet(cabTest[12], allKoeffs[12]);
-    let cab_14 = new Cabinet(cabTest[13], allKoeffs[13]);
-    let cab_15 = new Cabinet(cabTest[14], allKoeffs[14]);
-    let cab_16 = new Cabinet(cabTest[15], allKoeffs[15]);
-
-    cabs.push(cab_1);
-    cabs.push(cab_2);
-    cabs.push(cab_3);
-    cabs.push(cab_4);
-    cabs.push(cab_5);
-    cabs.push(cab_6);
-    cabs.push(cab_7);
-    cabs.push(cab_8);
-    cabs.push(cab_9);
-    cabs.push(cab_10);
-    cabs.push(cab_11);
-    cabs.push(cab_12);
-    cabs.push(cab_13);
-    cabs.push(cab_14);
-    cabs.push(cab_15);
-    cabs.push(cab_16);
-
-    for(let i = 0; i < cabs.length; i++) {
-        let tmpCab = cabs[i];
-
-        for(let j = 0; j < tmpCab.params.length; j++) {
-            tmpCab.cab.points[j].x = tmpCab.params[j][0] * level_4_svg_wapper_width;
-            tmpCab.cab.points[j].y = tmpCab.params[j][1] * level_4_svg_wapper_height;
+        for(let j = 0; j < tmpCab.coeffs.length; j++) {
+            tmpCab.cab.points[j].x = tmpCab.coeffs[j][0] * level_4_svg_wapper_width;
+            tmpCab.cab.points[j].y = tmpCab.coeffs[j][1] * level_4_svg_wapper_height;
         }
     }
+}*/
 
+function initCheckpoints() {
+    CHECKPOINTS = $(".grid-map").children(".checkpoint");
 }
 
 
+// input: HTML-element, HTML-element
+function getDistance(obj1, obj2) {
+        let objSize = obj1.getBoundingClientRect();
+        let objSizeNext = obj2.getBoundingClientRect();
+        return Math.sqrt(
+            (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
+            (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
+}
 
+function getClosestCheckpoint() {
+    let closestCheckpoint;
+    for(let i = 0; i < CHECKPOINTS.length; i++) {
+        let currCheckpoint = CHECKPOINTS[i];
+        let currCheckpointNext = CHECKPOINTS[i+1];
+        let currDist = getDistance(currCheckpoint, currCheckpointNext);
+        for(let j = 0; j < CHECKPOINTS.length; j++ ) {
+            let tmpCheckpoint = CHECKPOINTS[j];
+            let dist = getDistance(currCheckpoint, tmpCheckpoint);
+            if( dist <= currDist) {
+                closestCheckpoint = tmpCheckpoint;
+            }
+        }
+    }
+    return closestCheckpoint;
+}
+
+
+function move(who, from, to) {
+    who.stopPropagation(false);// как избавиться от этого?
+    let passedCheckpoints = [];
+        
+    function frame(obj, toX, toY) {
+        let me = $(obj.target)[0];
+        if (me.offsetLeft == toX && me.offsetTop == toY) {
+            clearInterval(time);
+        } else {
+            $(obj.target).offset ( {
+                left: me.offsetLeft + 1,
+                top: me.offsetTop + 1
+            });
+        }
+    }
+    // defining first checkpoint
+    let placeholderName = to.classList[0];
+    let placeholderNumber = placeholderName.split('-')[1];
+    let startCheckpoint;
+    // let startCheckpointName;
+
+    // getting first checkpoint
+    for(let i = 0; i < CHECKPOINTS.length; i++) {
+        if(Number(CHECKPOINTS[i].classList[0].split('-')[1]) == Number(placeholderNumber)) {
+            startCheckpoint = CHECKPOINTS[i];
+            break;
+        }
+    }
+    //get last checkpoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    passedCheckpoints.push(startCheckpoint);
+    let x = $(who.target)[0].offsetLeft;
+    let y = $(who.target)[0].offsetTop;
+    let JQ_who = $(who.target).detach();
+
+    JQ_who.appendTo($('.floor-4-wrapper'));
+    JQ_who.offset ( {
+        left: x,
+        top: y
+    });
+
+    console.log(CHECKPOINTS)
+
+    for(let i = 0; i < CHECKPOINTS.length; i++) {
+
+        let nextCoordinates = CHECKPOINTS[i].getBoundingClientRect();
+
+        // let tmpX = (nextCoordinates.x - $(who.target)[0].offsetLeft) / 100;
+        // let tmpY = (nextCoordinates.y - $(who.target)[0].offsetTop) / 100;
+        // let time = setInterval(() => {
+        //     if ($(who.target)[0].offsetLeft == nextCoordinates.x && $(who.target)[0].offsetTop == nextCoordinates.y) {
+        //             clearInterval(time);
+        //     } else {
+                
+        //         x = $(who.target)[0].offsetLeft + tmpX;
+        //         y = $(who.target)[0].offsetTop + tmpY;
+                // $(who.target).offset ( {
+                //     left: x,
+                //     top: y
+                // });
+                
+        //     }
+        // }, 1000);
+
+
+        let tmpX = (nextCoordinates.x - $(who.target)[0].offsetLeft);
+        let tmpY = (nextCoordinates.y - $(who.target)[0].offsetTop);
+        // console.log("$(who.target)[0].offsetLeft: " + $(who.target)[0].offsetLeft + "$(who.target)[0].offsetTop: " + $(who.target)[0].offsetTop);
+        // console.log("nextCoordinates.x: " + nextCoordinates.x + "nextCoordinates.y: " + nextCoordinates.y);
+        // console.log("tmpX: " + tmpX + "tmpY: " + tmpY);
+        
+        setTimeout(() => {
+            JQ_who.style+=`position: absolute; transition: 1s ease-out; transform: translate(${tmpX}px, ${tmpY}px)`;
+        }, 1000);
+        setTimeout(() => {
+            $(who.target).offset ( {
+                left: nextCoordinates.x,
+                top: nextCoordinates.y
+            });
+        }, 1000);
+        JQ_who.style+=`position: absolute; transition: 10s ease-out; transform: translate(0px, 0px)`;
+        
+        
+    }
+
+    who.stopPropagation(true);
+    Cabinet.to = false;
+}
+
+function getCabFromPlaceholder(placeholder) {
+    
+    for(let i = 0; i < CABINETS.length; i++) {
+        let placeholderName = placeholder.classList[0];
+        // для имен классов дивов с 2-мя или 1-ой цифрой
+        if(placeholderName[6] == '-') {
+            if(CABINETS[i].cab.id === placeholder.classList[0].slice(0, 6)) {
+                return CABINETS[i];
+            }
+        } else {
+            if(CABINETS[i].cab.id === placeholder.classList[0].slice(0, 5)) {
+                return CABINETS[i];
+            }
+        }
+    }
+}
+
+$('.placeholder').click((event) => {
+    let curEvent = event;
+    let curPlace = event.currentTarget;
+    // console.log(Cabinet.destinationChecker)
+
+    // curPlace = event.currentTarget;
+    // condition for KORIDOR PARADNAYA PRIHOZHAYA
+    if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
+    
+        let child1 = $('.cab-1-1-place')[0];
+        let child2 = $('.cab-1-2-place')[0];
+    
+        let person = document.createElement('div');
+        person.setAttribute("class", "person-icon");
+    
+        if(child1.children.length >= child2.children.length){
+            child2.appendChild(person);
+        } else {
+            child1.appendChild(person);
+        }
+    
+    } else {
+        let person = document.createElement('div');
+        person.setAttribute("class", "person-icon");
+    
+        curPlace.appendChild(person);
+    }
+
+    $(".person-icon").on("click", (event) => {
+        Cabinet.personToMove = event;
+        Cabinet.placeholderToMoveFrom = curEvent;
+    });
+});
+
+$(".move").on("click", (event) => {
+    // Cabinet.destinationChecker = true;
+    // if(Cabinet.destinationChecker) {
+    //     move(event, curPlace);
+    //     Cabinet.destinationChecker = false;
+    // }
+    let destinationPlaceholderName;
+    let destinationPlaceholder;
+    if(Cabinet.personToMove.currentTarget) {
+        let we = $("input[type='radio'");
+        for(let i = 0; i < we.length; i++) {
+            if(we[i].checked) {
+                destinationPlaceholderName = we[i].value;
+            }
+        }
+        
+        if(destinationPlaceholderName[6] == '-') {
+            destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 7)}` + "place")[0];
+        } else {
+            destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 6)}` + "place")[0];
+        }
+        
+        move(
+            Cabinet.personToMove,
+            Cabinet.placeholderToMoveFrom,
+            destinationPlaceholder
+            )
+    }
+});
 
 $(document).ready(() => {
-    resizeCabs();
+    initCheckpoints();
+    /*initCabinets();
+    resizeCabs();*/
 })
 
-window.onresize = function( event ) {
+/*window.onresize = function( event ) {
     resizeCabs();
-};
+};*/
