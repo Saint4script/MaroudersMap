@@ -236,7 +236,7 @@ $(".move").on("click", (event) => {
     let destinationPlaceholderName;
     let destinationPlaceholder;
     if(Cabinet.personToMove.currentTarget) {
-        let we = $("input[type='radio'");
+        let we = $("input[type='radio']");
         for(let i = 0; i < we.length; i++) {
             if(we[i].checked) {
                 destinationPlaceholderName = we[i].value;
@@ -256,6 +256,10 @@ $(".move").on("click", (event) => {
             )
     }
 });
+
+$(".cab-10-place").on("click", (event) => {
+    console.log("ya srabotal v 10 cabe")
+})
 
 $(document).ready(() => {
     initCheckpoints();
