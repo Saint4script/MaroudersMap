@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(54, 1fr);
     grid-template-rows: repeat(34, 1fr);
+    padding: 70px;
     width: 100%;
     height: 100%;
     position: absolute;
