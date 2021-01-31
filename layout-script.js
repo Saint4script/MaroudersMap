@@ -1,8 +1,6 @@
 const WID = 1280;// ширина - для отношений с полигонами
 const HEI = 688;// высота
 CABINETS = []
-
-
 let CHECKPOINTS = []
 
 class Cabinet {
@@ -11,7 +9,6 @@ class Cabinet {
     static placeholderToMoveFrom;
     static personEvent;
 
-    /* В данный момент не используется и вряд ли будет
     constructor(cab, coeffs) {
         this.cab = cab;
         this.coeffs = coeffs;
@@ -21,25 +18,25 @@ class Cabinet {
         let koeffs =[];
         for (let j = 0; j < cabinet.points.length; j++) {
             let currentPair = [];
-    
+
             currentPair.push(cabinet.points[j].x / WID);
             currentPair.push(cabinet.points[j].y / HEI);
             koeffs.push(currentPair);
         }
         return koeffs
-    }*/
+    }
 }
 
-/* В данный момент не используется и вряд ли будет
 function initCabinets() {
     let cabs = $(".svg-wrapper svg").children();
     for(let i = 0; i < cabs.length; i++) {
         CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
     }
-}*/
+}
+function initCheckpoints() {
+    CHECKPOINTS = $(".grid-map").children(".checkpoint");
+}
 
-
-/* В данный момент не используется и вряд ли будет
 function resizeCabs() {
 
     let level_4_svg_wapper_width = $(".svg-wrapper").width();
@@ -53,20 +50,15 @@ function resizeCabs() {
             tmpCab.cab.points[j].y = tmpCab.coeffs[j][1] * level_4_svg_wapper_height;
         }
     }
-}*/
-
-function initCheckpoints() {
-    CHECKPOINTS = $(".grid-map").children(".checkpoint");
 }
-
 
 // input: HTML-element, HTML-element
 function getDistance(obj1, obj2) {
-        let objSize = obj1.getBoundingClientRect();
-        let objSizeNext = obj2.getBoundingClientRect();
-        return Math.sqrt(
-            (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
-            (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
+    let objSize = obj1.getBoundingClientRect();
+    let objSizeNext = obj2.getBoundingClientRect();
+    return Math.sqrt(
+        (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
+        (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
 }
 
 function getClosestCheckpoint() {
@@ -87,26 +79,15 @@ function getClosestCheckpoint() {
 }
 
 
-function move(who, from, to) {
+function movePerson(who, from, to) {
+    console.log(who)
     who.stopPropagation(false);// как избавиться от этого?
     let passedCheckpoints = [];
-        
-    function frame(obj, toX, toY) {
-        let me = $(obj.target)[0];
-        if (me.offsetLeft == toX && me.offsetTop == toY) {
-            clearInterval(time);
-        } else {
-            $(obj.target).offset ( {
-                left: me.offsetLeft + 1,
-                top: me.offsetTop + 1
-            });
-        }
-    }
+
     // defining first checkpoint
     let placeholderName = to.classList[0];
     let placeholderNumber = placeholderName.split('-')[1];
     let startCheckpoint;
-    // let startCheckpointName;
 
     // getting first checkpoint
     for(let i = 0; i < CHECKPOINTS.length; i++) {
@@ -118,6 +99,7 @@ function move(who, from, to) {
     //get last checkpoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     passedCheckpoints.push(startCheckpoint);
+
     let x = $(who.target)[0].offsetLeft;
     let y = $(who.target)[0].offsetTop;
     let JQ_who = $(who.target).detach();
@@ -128,56 +110,116 @@ function move(who, from, to) {
         top: y
     });
 
-    console.log(CHECKPOINTS)
 
-    for(let i = 0; i < CHECKPOINTS.length; i++) {
+    function animate({ timing, draw, duration }) {
 
-        let nextCoordinates = CHECKPOINTS[i].getBoundingClientRect();
+        let start = performance.now();
 
-        // let tmpX = (nextCoordinates.x - $(who.target)[0].offsetLeft) / 100;
-        // let tmpY = (nextCoordinates.y - $(who.target)[0].offsetTop) / 100;
-        // let time = setInterval(() => {
-        //     if ($(who.target)[0].offsetLeft == nextCoordinates.x && $(who.target)[0].offsetTop == nextCoordinates.y) {
-        //             clearInterval(time);
-        //     } else {
-                
-        //         x = $(who.target)[0].offsetLeft + tmpX;
-        //         y = $(who.target)[0].offsetTop + tmpY;
-                // $(who.target).offset ( {
-                //     left: x,
-                //     top: y
-                // });
-                
-        //     }
-        // }, 1000);
+        requestAnimationFrame(function animate(time) {
+            // timeFraction изменяется от 0 до 1
+            let timeFraction = (time - start) / duration;
+            if (timeFraction > 1) timeFraction = 1;
 
+            // вычисление текущего состояния анимации
+            let progress = timing(timeFraction);
 
-        let tmpX = (nextCoordinates.x - $(who.target)[0].offsetLeft);
-        let tmpY = (nextCoordinates.y - $(who.target)[0].offsetTop);
-        // console.log("$(who.target)[0].offsetLeft: " + $(who.target)[0].offsetLeft + "$(who.target)[0].offsetTop: " + $(who.target)[0].offsetTop);
-        // console.log("nextCoordinates.x: " + nextCoordinates.x + "nextCoordinates.y: " + nextCoordinates.y);
-        // console.log("tmpX: " + tmpX + "tmpY: " + tmpY);
-        
-        setTimeout(() => {
-            JQ_who.style+=`position: absolute; transition: 1s ease-out; transform: translate(${tmpX}px, ${tmpY}px)`;
-        }, 1000);
-        setTimeout(() => {
-            $(who.target).offset ( {
-                left: nextCoordinates.x,
-                top: nextCoordinates.y
-            });
-        }, 1000);
-        JQ_who.style+=`position: absolute; transition: 10s ease-out; transform: translate(0px, 0px)`;
-        
-        
+            draw(progress); // отрисовать её ,progress==1
+
+            if (timeFraction < 1) {
+                requestAnimationFrame(animate);
+            }
+        });
     }
+
+    function moveByList() {
+        // distanation points
+        const list = CHECKPOINTS;
+        const moveClass = new Move(JQ_who[0]);
+        moveClass.move(list);
+    }
+    // console.log(JQ_who[0].style.top)
+
+    class Move {
+        /** index of active route step */
+        index = 0;
+        /** list with dest point */
+        list;
+        /** html node should move */
+        movingNode;
+
+        constructor(node) {
+            this.movingNode = node;
+        }
+
+        /**
+         * run move by route list
+         */
+        move(list) {
+            this.index = 0;
+            this.list = list;
+            this._next();
+        }
+
+        /**
+         * Move to point
+         */
+        _moveToPoint(x, y) {
+            let animTime = 1000;
+            // save context for call next()
+            const self = this;
+            animate({
+                duration: animTime,
+                draw(progress) {
+                    const node = self.movingNode;
+                    //get current position
+                    const top = parseInt(node.style.top) || 0;
+                    const left = parseInt(node.style.left) || 0;
+                    //calculate transition
+                    const xTrans = x - left;
+                    const yTrans = y - top;
+                    node.style.transform = `translate3d(${
+                        progress * (xTrans)
+                    }px, ${progress * (yTrans)}px, 0)`;
+                    if (progress === 1) {
+                        // set finish posotion, reset transition
+                        node.style.top = `${y}px`;
+                        node.style.left = `${x}px`;
+                        node.style.transform = ``;
+                        self._next();
+                    }
+                },
+                timing(a) {
+                    return a;
+                }
+            });
+        }
+
+        /**
+         * Run next step in route
+         */
+        _next() {
+            const step = this.list[this.index];
+
+            if (step) {
+                let nextCoordinates = step.getBoundingClientRect() || 0;
+                this._moveToPoint(nextCoordinates.x, nextCoordinates.y);
+            }
+            this.index++;
+        }
+    }
+
+
+    moveByList();
+    // }
+
+    JQ_who[0].attributes[1].nodeValue+="background-color: black; filter: brightness(120%);";
 
     who.stopPropagation(true);
     Cabinet.to = false;
 }
 
 function getCabFromPlaceholder(placeholder) {
-    
+
     for(let i = 0; i < CABINETS.length; i++) {
         let placeholderName = placeholder.classList[0];
         // для имен классов дивов с 2-мя или 1-ой цифрой
@@ -200,29 +242,34 @@ $('.placeholder').click((event) => {
 
     // curPlace = event.currentTarget;
     // condition for KORIDOR PARADNAYA PRIHOZHAYA
-    if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
-    
-        let child1 = $('.cab-1-1-place')[0];
-        let child2 = $('.cab-1-2-place')[0];
-    
-        let person = document.createElement('div');
-        person.setAttribute("class", "person-icon");
-    
-        if(child1.children.length >= child2.children.length){
-            child2.appendChild(person);
+    if(!Cabinet.to) {
+        if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
+
+            let child1 = $('.cab-1-1-place')[0];
+            let child2 = $('.cab-1-2-place')[0];
+
+            let person = document.createElement('div');
+            person.setAttribute("class", "person-icon");
+
+            if(child1.children.length >= child2.children.length){
+                child2.appendChild(person);
+            } else {
+                child1.appendChild(person);
+            }
+
         } else {
-            child1.appendChild(person);
+            let person = document.createElement('div');
+            person.setAttribute("class", "person-icon");
+
+            curPlace.appendChild(person);
         }
-    
-    } else {
-        let person = document.createElement('div');
-        person.setAttribute("class", "person-icon");
-    
-        curPlace.appendChild(person);
     }
 
+
     $(".person-icon").on("click", (event) => {
+        Cabinet.to = true;
         Cabinet.personToMove = event;
+        event.target.style="background-color: #fbfbfb; filter: brightness(120%);";
         Cabinet.placeholderToMoveFrom = curEvent;
     });
 });
@@ -242,31 +289,27 @@ $(".move").on("click", (event) => {
                 destinationPlaceholderName = we[i].value;
             }
         }
-        
+
         if(destinationPlaceholderName[6] == '-') {
             destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 7)}` + "place")[0];
         } else {
             destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 6)}` + "place")[0];
         }
-        
-        move(
+
+        movePerson(
             Cabinet.personToMove,
             Cabinet.placeholderToMoveFrom,
             destinationPlaceholder
-            )
+        )
     }
 });
 
-$(".cab-10-place").on("click", (event) => {
-    console.log("ya srabotal v 10 cabe")
-})
-
 $(document).ready(() => {
     initCheckpoints();
-    /*initCabinets();
-    resizeCabs();*/
+    initCabinets();
+    resizeCabs();
 })
 
-/*window.onresize = function( event ) {
+window.onresize = function( event ) {
     resizeCabs();
-};*/
+};

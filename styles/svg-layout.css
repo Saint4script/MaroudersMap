@@ -25,7 +25,7 @@ body {
 .svg-wrapper {
     background-position: 0 0;
     background-size: cover;
-    padding: 0px;
+    padding: 70px;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -40,11 +40,7 @@ svg {
     height: 100%;
 }
 
-/*.cab {
-    opacity: 0.84;
-}*/
 
-/*  IN PROGRESS ####...%     */
 form {
     z-index: 100;
     width: 20vw;

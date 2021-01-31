@@ -37,12 +37,12 @@
         <div class="cab-15-place placeholder"></div>
         <div class="cab-16-place placeholder"></div>
 
-       <!-- <div class="checkPoint-15 checkpoint"></div>
+        <div class="checkPoint-15 checkpoint"></div>
         <div class="checkPoint-9 checkpoint"></div>
         <div class="checkPoint-8 checkpoint"></div>
         <div class="checkPoint-16 checkpoint"></div>
         <div class="checkPoint-100 checkpoint"></div>
-        <div class="checkPoint-101 checkpoint"></div>-->
+        <div class="checkPoint-101 checkpoint"></div>
 
     </div>
 
@@ -51,11 +51,12 @@
     <div class="svg-wrapper">
         <svg viewbox="0 0 1280 680" preserveAspectRatio="none">
 
-            <!--<g class="cab" id="cab-1">
-                <path d="m 957,400 l 315,0 l 0,-30" stroke="var(&#45;&#45;wall)" stroke-width="var(&#45;&#45;wall-thickness)" fill="none" />
-                <path d="m 1272, 320 l 0,-33" stroke="var(&#45;&#45;wall)" stroke-width="var(&#45;&#45;wall-thickness)" fill="none" />
-                <path d="m 1272, 370 l 0,-50" stroke="var(&#45;&#45;door)" stroke-width="var(&#45;&#45;door-thickness)" fill="none" />
-            </g>-->
+            <g class="cab" id="cab-1">
+<!--                Позже допишу код всех стен коридора -->
+                <path d="m 952,400 l 323,0 l 0,-30" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                <path d="m 1275, 320 l 0,-37" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                <path d="m 1275, 370 l 0,-50" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+            </g>
 
             <g class="cab" id="cab-2">
                 <path d="m 1230,279 l -20,0 l 0,-119 l -72,0 l 0,-156 l 138,0 l 0,275 l -10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
@@ -99,10 +100,10 @@
             </g>
 
 
-            <!--<g class="cab" id="cab-9">
-                <path d="m 462,419 l -12,0 l 0,-140 l 120,0 l 0,140 l -48,0" stroke="var(&#45;&#45;wall)" stroke-width="var(&#45;&#45;wall-thickness)" fill="none" />
-                <path d="m 466,423 l 0,-46" stroke="var(&#45;&#45;door)" stroke-width="var(&#45;&#45;door-thickness)" fill="none" />
-            </g>-->
+            <g class="cab" id="cab-9">
+                <path d="m 462,419 l -12,0 l 0,-140 l 120,0 l 0,140 l -48,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                <path d="m 464,422 l 0,-46" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+            </g>
 
             <g class="cab" id="cab-10">
                 <path d="m 4,4 l 660,0 l 0,16 l 48,0 l 0,260 l -48,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
@@ -110,10 +111,10 @@
                 <path d="m 589,278 l 0,74" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
             </g>
 
-            <!--<g class="cab" id="cab-11" >
-                <path d="m 394,400 l -15,0 l 0,-120 l 70,0 l 0,128" stroke="var(&#45;&#45;wall)" stroke-width="var(&#45;&#45;wall-thickness)" fill="none" />
-                <path d="m 437,404 l 0,-46" stroke="var(&#45;&#45;door)" stroke-width="var(&#45;&#45;door-thickness)" fill="none" />
-            </g>-->
+            <g class="cab" id="cab-11" >
+                <path d="m 394,401 l -15,0 l 0,-121 l 70,0 l 0,121 l -15,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                <path d="m 432,402 l 0,-46" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+            </g>
 
             <g class="cab" id="cab-12">
                 <path d="m 4,401 l 119,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
@@ -130,10 +131,10 @@
                 <path d="m 165,398 l 0,46" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
             </g>
 
-            <!--<g class="cab" id="cab-14">
-                <path d="m 230,400 l -40,0 l 0,-120 l 188,0 l 0,120 l -80,0" stroke="var(&#45;&#45;wall)" stroke-width="var(&#45;&#45;wall-thickness)" fill="none" />
-                <path d="m 234,396 l 0,46" stroke="var(&#45;&#45;door)" stroke-width="var(&#45;&#45;door-thickness)" fill="none" />
-            </g>-->
+            <g class="cab" id="cab-14">
+                <path d="m 230,401 l -40,0 l 0,-121 l 188,0 l 0,121 l -90,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                <path d="m 238,399 l 0,46" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+            </g>
 
             <g class="cab" id="cab-15">
                 <path d="m 356,481 l 134,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
@@ -150,35 +151,9 @@
         </svg>
     </div>
 
-        <!--
-    Временно пусть остаётся, на случай если будут проблемы в использовании svg  -->
-    <div class="svg-wrapper map">
-        <svg>
-<!--            <polygon class="cab" id="cab-10" points="0,0 663,0 663,20 711,20 711,283 0,283" fill="#ff05b4"/> pink-->
-            <!--<polygon class="cab" id="cab-5"  points="663,0 1019,0 1019,61 925,61 925,223 782,223 782,283 711,283 711,21 663,20" fill="#0341fc"/> blue-->
-<!--            <polygon class="cab" id="cab-7"  points="1019,0 1138,0 1138,61 1019,61" fill="#ffdd80"/> охра-->
-            <!--<polygon class="cab" id="cab-2"  points="1138,0 1280,0 1280,283 1210,283 1210,162 1138,162" fill="#ff6f00"/> оранжевый-->
-            <!--<polygon class="cab" id="cab-6"  points="925,61 1019,61 1019,142 1044,142 1044,283 925,283 925,258" fill="#2aa13c"/> зеленый-->
-            <!--<polygon class="cab" id="cab-3"  points="1019,61 1138,61 1138,162 1210,162 1210,243 1116,243 1116,283 1044,283 1044,142 1019,142" fill="#8f8f8f" /> серый-->
-            <!--<polygon class="cab" id="cab-8"  points="782,223 925,223 925,323 782,323" fill="#ffc7c7"/> бежевый-->
-<!--            <polygon class="cab" id="cab-4"  points="1116,243 1210,243 1210,283 1116,283" fill="#ffb60d"/> горчичный-->
-
-<!--            <polygon class="cab" id="cab-13" points="0,283 190,283 190,405 0,405" fill="#ff150d"/> красный-->
-            <polygon class="cab" id="cab-14" points="190,283 379,283 379,405 190,405" fill="#5e1873"/> фиолетовый
-            <polygon class="cab" id="cab-11" points="379,283 450,283 450,405 379,405" fill="#d9bc9c"/> пэрсик
-            <polygon class="cab" id="cab-9"  points="450,283 569,283 569,425 450,425" fill="#93bd97"/> темно-салатный
-
-            <<!--polygon class="cab" id="cab-12" points="0,405 450,405 450,486 356,486 356,688 0,688" fill="#bed1c0"/> cеро-салатный-->
-            <!--<polygon class="cab" id="cab-15" points="356,486 735,486 735,688 356,688" fill="#00630a"/> темно-зеленый-->
-            <!--<polygon class="cab" id="cab-16" points="735,405 948,405 948,688 735,688" fill="#8a5dde"/> темно-фиолетовый-->
-
-            <polygon class="cab" id="cab-1" points="450,425 569,425 569,283 782,283 782,323 924,323 924,283 1280,283
-                                                1280,405 735,405 735,486 450,486" fill="#f2ff00" /> ЖОЛТЭЙ
-        </svg>
-    </div>
 
     <!--    In progress ###..   -->
-    <!--<form>
+    <form>
         <div class="from">
             <input type="radio" name="placeFrom" value="cab-8-from">
             <label for="cab-8">cab-8</label>
@@ -199,7 +174,7 @@
 
     <input type="button" class="move" value="move">
 
-    </form>-->
+    </form>
 </div>
 
 
