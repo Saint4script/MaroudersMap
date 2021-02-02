@@ -24,7 +24,6 @@ class Cabinet {
         let koeffs =[];
         for (let j = 0; j < cabinet.points.length; j++) {
             let currentPair = [];
-
             currentPair.push(cabinet.points[j].x / WID);
             currentPair.push(cabinet.points[j].y / HEI);
             koeffs.push(currentPair);
@@ -302,7 +301,6 @@ $(".move").on("click", (event) => {
                 destinationPlaceholderName = we[i].value;
             }
         }
-
         if(destinationPlaceholderName[6] == '-') {
             destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 7)}` + "place")[0];
         } else {
