@@ -1,7 +1,13 @@
 const WID = 1280;// ширина - для отношений с полигонами
 const HEI = 688;// высота
-CABINETS = []
-let CHECKPOINTS = []
+CABINETS = [];
+CHECKPOINTS = [];
+
+ROUTES = new Map();
+CAB_16_ROUTES = new Map();
+CAB_16_ROUTES.set("8", ["16-1", "16", "8"]);
+CAB_16_ROUTES.set("7", ["16-1", "16", "002", "5", "5-1", "5-2", "7"]);
+ROUTES.set("16", CAB_16_ROUTES);
 
 class Cabinet {
     static destinationChecker = false;
@@ -9,9 +15,9 @@ class Cabinet {
     static placeholderToMoveFrom;
     static personEvent;
 
-    constructor(cab, coeffs) {
+    constructor(cab, placeholder) {
         this.cab = cab;
-        this.coeffs = coeffs;
+        this.placeholder = placeholder;
     }
 
     static getCoeffs(cabinet) {
@@ -29,77 +35,71 @@ class Cabinet {
 
 function initCabinets() {
     let cabs = $(".svg-wrapper svg").children();
+    let placeholders = $(".grid-map").children();
     for(let i = 0; i < cabs.length; i++) {
-        CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
+        CABINETS.push(new Cabinet(cabs[i], placeholders[i]))
     }
 }
 function initCheckpoints() {
     CHECKPOINTS = $(".grid-map").children(".checkpoint");
-}
-
-function resizeCabs() {
-
-    let level_4_svg_wapper_width = $(".svg-wrapper").width();
-    let level_4_svg_wapper_height = $(".svg-wrapper").height();
-
-    for(let i = 0; i < CABINETS.length; i++) {
-        let tmpCab = CABINETS[i];
-
-        for(let j = 0; j < tmpCab.coeffs.length; j++) {
-            tmpCab.cab.points[j].x = tmpCab.coeffs[j][0] * level_4_svg_wapper_width;
-            tmpCab.cab.points[j].y = tmpCab.coeffs[j][1] * level_4_svg_wapper_height;
-        }
-    }
+    // console.log(CHECKPOINTS)
 }
 
 // input: HTML-element, HTML-element
 function getDistance(obj1, obj2) {
     let objSize = obj1.getBoundingClientRect();
     let objSizeNext = obj2.getBoundingClientRect();
+    // console.log("x1: " + objSize.x + " y1: " + objSize.y + " x2: " + objSizeNext.x + " y2: " + objSizeNext.y)
     return Math.sqrt(
         (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
         (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
 }
 
-function getClosestCheckpoint() {
-    let closestCheckpoint;
-    for(let i = 0; i < CHECKPOINTS.length; i++) {
-        let currCheckpoint = CHECKPOINTS[i];
-        let currCheckpointNext = CHECKPOINTS[i+1];
-        let currDist = getDistance(currCheckpoint, currCheckpointNext);
-        for(let j = 0; j < CHECKPOINTS.length; j++ ) {
-            let tmpCheckpoint = CHECKPOINTS[j];
-            let dist = getDistance(currCheckpoint, tmpCheckpoint);
-            if( dist <= currDist) {
+function getClosestCheckpoint(currentCheckpoint) {
+    let closestCheckpoint = currentCheckpoint;
+    let currDist;
+    let tmpCheckpoint;
+    let dist = Number.MAX_SAFE_INTEGER;
+
+    for(let j = 0; j < CHECKPOINTS.length; j++ ) {
+        tmpCheckpoint = CHECKPOINTS[j];
+        if(tmpCheckpoint == currentCheckpoint) {
+            continue;
+        } else {
+            currDist = getDistance(currentCheckpoint, tmpCheckpoint);
+            if(currDist <= dist) {
                 closestCheckpoint = tmpCheckpoint;
+                dist = currDist;
+            } else {
+                // console.log(j)
+                // console.log(CHECKPOINTS[j])
+                // console.log("dist is: " + currDist)
             }
         }
+        
     }
+
     return closestCheckpoint;
 }
 
-
+function getCheckpoint(number) {
+    return($('.checkPoint-' + number)[0]);
+}
 function movePerson(who, from, to) {
-    console.log(who)
     who.stopPropagation(false);// как избавиться от этого?
-    let passedCheckpoints = [];
 
-    // defining first checkpoint
-    let placeholderName = to.classList[0];
-    let placeholderNumber = placeholderName.split('-')[1];
-    let startCheckpoint;
+    let path = [];
 
-    // getting first checkpoint
-    for(let i = 0; i < CHECKPOINTS.length; i++) {
-        if(Number(CHECKPOINTS[i].classList[0].split('-')[1]) == Number(placeholderNumber)) {
-            startCheckpoint = CHECKPOINTS[i];
-            break;
-        }
+    let pathFromID = from.classList[0].split('-')[1];
+    let pathToID = to.classList[0].split('-')[1];
+    
+    let pathStringsID = ROUTES.get(pathFromID).get(pathToID);
+    for(let i = 0; i < pathStringsID.length; i++) {
+        path.push($('.checkPoint-'+pathStringsID[i])[0]);
     }
-    //get last checkpoint !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    console.log(path);
 
-    passedCheckpoints.push(startCheckpoint);
-
+    // removing person-item from parent to make it able to move 
     let x = $(who.target)[0].offsetLeft;
     let y = $(who.target)[0].offsetTop;
     let JQ_who = $(who.target).detach();
@@ -133,19 +133,21 @@ function movePerson(who, from, to) {
 
     function moveByList() {
         // distanation points
-        const list = CHECKPOINTS;
-        const moveClass = new Move(JQ_who[0]);
+        const list = path;
         moveClass.move(list);
     }
     // console.log(JQ_who[0].style.top)
 
     class Move {
+        static checker = false;
         /** index of active route step */
         index = 0;
         /** list with dest point */
         list;
         /** html node should move */
         movingNode;
+
+        doneCallback;
 
         constructor(node) {
             this.movingNode = node;
@@ -158,6 +160,7 @@ function movePerson(who, from, to) {
             this.index = 0;
             this.list = list;
             this._next();
+            this.checker = true;
         }
 
         /**
@@ -203,16 +206,25 @@ function movePerson(who, from, to) {
             if (step) {
                 let nextCoordinates = step.getBoundingClientRect() || 0;
                 this._moveToPoint(nextCoordinates.x, nextCoordinates.y);
+            } else {
+                if ( typeof this.doneCallback === 'function') {
+                    this.doneCallback();
+                }
             }
             this.index++;
         }
     }
 
+    const moveClass = new Move(JQ_who[0]);
+
+    moveClass.doneCallback = () => {
+        JQ_who = $(who.target).detach();
+        JQ_who.appendTo($(to));
+        JQ_who[0].attributes[1].nodeValue+="background-color: black; filter: brightness(120%); top: 0!important; left: 0!important; transform: none;";
+    }
+
 
     moveByList();
-    // }
-
-    JQ_who[0].attributes[1].nodeValue+="background-color: black; filter: brightness(120%);";
 
     who.stopPropagation(true);
     Cabinet.to = false;
@@ -270,7 +282,6 @@ $('.placeholder').click((event) => {
         Cabinet.to = true;
         Cabinet.personToMove = event;
         event.target.style="background-color: #fbfbfb; filter: brightness(120%);";
-        Cabinet.placeholderToMoveFrom = curEvent;
     });
 });
 
@@ -280,10 +291,12 @@ $(".move").on("click", (event) => {
     //     move(event, curPlace);
     //     Cabinet.destinationChecker = false;
     // }
+    let fromPlaceholderName;
+    let fromPlaceholder;
     let destinationPlaceholderName;
     let destinationPlaceholder;
     if(Cabinet.personToMove.currentTarget) {
-        let we = $("input[type='radio']");
+        let we = $(".to input[type='radio']");
         for(let i = 0; i < we.length; i++) {
             if(we[i].checked) {
                 destinationPlaceholderName = we[i].value;
@@ -296,9 +309,22 @@ $(".move").on("click", (event) => {
             destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 6)}` + "place")[0];
         }
 
+        we = $(".from input[type='radio']");
+        for(let i = 0; i < we.length; i++) {
+            if(we[i].checked) {
+                fromPlaceholderName = we[i].value;
+            }
+        }
+
+        if(fromPlaceholderName[6] == '-') {
+            fromPlaceholder = $(`.${fromPlaceholderName.slice(0, 7)}` + "place")[0];
+        } else {
+            fromPlaceholder = $(`.${fromPlaceholderName.slice(0, 6)}` + "place")[0];
+        }
+
         movePerson(
             Cabinet.personToMove,
-            Cabinet.placeholderToMoveFrom,
+            fromPlaceholder,
             destinationPlaceholder
         )
     }
@@ -307,9 +333,8 @@ $(".move").on("click", (event) => {
 $(document).ready(() => {
     initCheckpoints();
     initCabinets();
-    resizeCabs();
 })
 
 window.onresize = function( event ) {
-    resizeCabs();
+    
 };

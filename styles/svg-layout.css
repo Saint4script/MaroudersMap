@@ -43,10 +43,11 @@ svg {
 
 form {
     z-index: 100;
-    width: 20vw;
+    width: 30vw;
     display: flex;
     background-color: green;
     position: fixed;
+    opacity: 0.8;
 }
 
 form button {
