@@ -3,170 +3,8 @@ const HEI = 688;// высота
 CABINETS = [];
 CHECKPOINTS = [];
 
-
 // ПЕРЕДЕЛАТЬ АПИ ПОД ТО, ЧТО У НАС НЕТ ТОЧКИ, ОТКУДА МЫ ИДЕМ ( ЭТО ПРОШЛАЯ КТ )
 // СДЕЛАТЬ АНИМАЦИЮ ИСЧЕЗНОВЕНИЯ ЭЛЕМЕНТА ПОСЛЕ ПРИХОДА В КОНЕЧНУЮ ТОЧКУ И ПЕРЕД АТТАЧЕМ
-
-ROUTES = new Map();
-
-CAB_9_ROUTES = new Map(); 
-
-CAB_9_ROUTES.set("1", ["9", "001", "000", "002", "003", "004"]);
-CAB_9_ROUTES.set("2", ["9", "001", "000", "002", "003", "2"]);
-CAB_9_ROUTES.set("3", ["9", "001", "000", "002", "003", "3"]);
-CAB_9_ROUTES.set("4", ["9", "001", "000", "002", "003", "4"]);
-CAB_9_ROUTES.set("5", ["9", "001", "000", "5", "5-1"]);
-CAB_9_ROUTES.set("6", ["9", "001", "000", "002", "003", "6"]);
-CAB_9_ROUTES.set("7", ["9", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_9_ROUTES.set("8", ["9", "001", "000", "002", "8"]);
-CAB_9_ROUTES.set("10", ["9", "001", "10", "10-1"]);
-CAB_9_ROUTES.set("11", ["9", "12", "11"]);
-CAB_9_ROUTES.set("12", ["9", "12", "12-1", "12-2", "12"]);
-CAB_9_ROUTES.set("13", ["9", "12", "12-1", "12-2", "12-3", "13"]);
-CAB_9_ROUTES.set("14", ["9", "12", "12-1", "14"]);
-CAB_9_ROUTES.set("15", ["9", "15", "15-1"]);
-CAB_9_ROUTES.set("16", ["9", "001", "000", "002", "16", "16-1"]);
-
-ROUTES.set("9", CAB_9_ROUTES);
-
-CAB_10_ROUTES = new Map(); 
-
-CAB_10_ROUTES.set("1", ["10-1", "10", "000", "002", "003", "004"]);
-CAB_10_ROUTES.set("2", ["10-1", "10", "000", "002", "003", "2", "2-1"]);
-CAB_10_ROUTES.set("3", ["10-1", "10", "000", "002", "003", "3"]);
-CAB_10_ROUTES.set("4", ["10-1", "10", "000", "002", "003", "4"]);
-CAB_10_ROUTES.set("5", ["10-1", "10", "000", "5", "5-1"]);
-CAB_10_ROUTES.set("6", ["10-1", "10", "000", "002", "003", "6"]);
-CAB_10_ROUTES.set("7", ["10-1", "10", "000", "5", "5-1", "5-2", "7"]);
-CAB_10_ROUTES.set("8", ["10-1", "10", "000", "002", "8"]);
-CAB_10_ROUTES.set("9", ["10-1", "10", "001", "9"]);
-CAB_10_ROUTES.set("11", ["10-1", "10", "001", "12", "11"]);
-CAB_10_ROUTES.set("12", ["10-1", "10", "001", "12", "12-1"]);
-CAB_10_ROUTES.set("13", ["10-1", "10", "001", "12", "12-1", "12-2", "12-3", "13"]);
-CAB_10_ROUTES.set("14", ["10-1", "10", "001", "12", "12-1", "14"]);
-CAB_10_ROUTES.set("15", ["10-1", "10", "001", "15", "15-1"]);
-CAB_10_ROUTES.set("16", ["10-1", "10", "000", "002", "16", "16-1"]);
-
-ROUTES.set("10", CAB_10_ROUTES);
-
-CAB_11_ROUTES = new Map(); 
-
-CAB_11_ROUTES.set("1", ["11", "12", "001", "002", "003", "004"]);
-CAB_11_ROUTES.set("2", ["11", "12", "001", "002", "003", "2"]);
-CAB_11_ROUTES.set("3", ["11", "12", "001", "002", "003", "3"]);
-CAB_11_ROUTES.set("4", ["11", "12", "001", "002", "003", "4"]);
-CAB_11_ROUTES.set("5", ["11", "12", "001", "000", "5", "5-1"]);
-CAB_11_ROUTES.set("6", ["11", "12", "001", "002", "003", "6"]);
-CAB_11_ROUTES.set("7", ["11", "12", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_11_ROUTES.set("8", ["11", "12", "001", "002", "8"]);
-CAB_11_ROUTES.set("9", ["11", "12", "9"]);
-CAB_11_ROUTES.set("10", ["11", "12", "001", "10", "10-1"]);
-CAB_11_ROUTES.set("12", ["11", "12-1", "12-2"]);
-CAB_11_ROUTES.set("13", ["11", "12-1", "12-2", "12-3", "13"]);
-CAB_11_ROUTES.set("14", ["11", "12-1", "14"]);
-CAB_11_ROUTES.set("15", ["11", "12", "15", "15-1"]);
-CAB_11_ROUTES.set("16", ["11", "12", "001", "000", "002", "16",  "16-1"]);
-
-ROUTES.set("11", CAB_11_ROUTES);
-
-CAB_12_ROUTES = new Map(); 
-
-CAB_12_ROUTES.set("1", ["12-2", "12-1", "12", "001", "000", "002", "003", "004"]);
-CAB_12_ROUTES.set("2", ["12-2", "12-1", "12", "001", "000", "002", "003", "2"]);
-CAB_12_ROUTES.set("3", ["12-2", "12-1", "12", "001", "000", "002", "003", "3"]);
-CAB_12_ROUTES.set("4", ["12-2", "12-1", "12", "001", "000", "002", "003", "4"]);
-CAB_12_ROUTES.set("5", ["12-2", "12-1", "12", "001", "000", "5", "5-1"]);
-CAB_12_ROUTES.set("6", ["12-2", "12-1", "12", "001", "000", "002", "003", "6"]);
-CAB_12_ROUTES.set("7", ["12-2", "12-1", "12", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_12_ROUTES.set("8", ["12-2", "12-1", "12", "001", "000", "002", "8"]);
-CAB_12_ROUTES.set("9", ["12-2", "12-1", "12", "9"]);
-CAB_12_ROUTES.set("10", ["12-2", "12-1", "12", "001", "10", "10-1"]);
-CAB_12_ROUTES.set("11", ["12-2", "12-1", "11"]);
-CAB_12_ROUTES.set("13", ["12-3", "13"]);
-CAB_12_ROUTES.set("14", ["12-2", "14"]);
-CAB_12_ROUTES.set("15", ["12-2", "12-1", "12", "15", "15-1"]);
-CAB_12_ROUTES.set("16", ["12-2", "12-1", "12", "001", "002", "16", "16-1"]);
-
-ROUTES.set("12", CAB_12_ROUTES);
-
-CAB_13_ROUTES = new Map(); 
-
-CAB_13_ROUTES.set("1", ["13", "12-3", "12-1", "12", "001", "000", "002", "003", "004"]);
-CAB_13_ROUTES.set("2", ["13", "12-3", "12-1", "12", "001", "000", "002", "003", "2", "2-1"]);
-CAB_13_ROUTES.set("3", ["13", "12-3", "12-1", "12", "001", "000", "002", "003", "3"]);
-CAB_13_ROUTES.set("4", ["13", "12-3", "12-1", "12", "001", "000", "002", "003", "4"]);
-CAB_13_ROUTES.set("5", ["13", "12-3", "12-1", "12", "001", "000", "5", "5-1"]);
-CAB_13_ROUTES.set("6", ["13", "12-3", "12-1", "12", "001", "000", "002", "003", "6"]);
-CAB_13_ROUTES.set("7", ["13", "12-3", "12-1", "12", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_13_ROUTES.set("8", ["13", "12-3", "12-1", "12", "001", "000", "002", "8"]);
-CAB_13_ROUTES.set("9", ["13", "12-3", "12-1", "12", "9"]);
-CAB_13_ROUTES.set("10", ["13", "12-3", "12-1", "12", "001", "10", "10-1"]);
-CAB_13_ROUTES.set("11", ["13", "12-3", "12-1", "11"]);
-CAB_13_ROUTES.set("12", ["13", "12-3"]);
-CAB_13_ROUTES.set("14", ["13", "12-3", "12-2", "14"]);
-CAB_13_ROUTES.set("15", ["13", "12-3", "12-1", "12", "15", "15-1"]);
-CAB_13_ROUTES.set("16", ["13", "12-3", "12-1", "12", "001", "000", "002", "16", "16-1"]);
-
-ROUTES.set("13", CAB_13_ROUTES);
-
-CAB_14_ROUTES = new Map();
-
-CAB_14_ROUTES.set("1", ["14", "12-1", "12", "001", "002", "003", "004"]);
-CAB_14_ROUTES.set("2", ["14", "12-1", "12", "001", "002", "003", "2"]);
-CAB_14_ROUTES.set("3", ["14", "12-1", "12", "001", "002", "003", "3"]);
-CAB_14_ROUTES.set("4", ["14", "12-1", "12", "001", "002", "003", "4"]);
-CAB_14_ROUTES.set("5", ["14", "12-1", "12", "001", "000", "5", "5-1"]);
-CAB_14_ROUTES.set("6", ["14", "12-1", "12", "001", "002", "003", "6"]);
-CAB_14_ROUTES.set("7", ["14", "12-1", "12", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_14_ROUTES.set("8", ["14", "12-1", "12", "001", "002", "8"]);
-CAB_14_ROUTES.set("9", ["14", "12-1", "12", "9"]);
-CAB_14_ROUTES.set("10", ["14", "12-1", "12", "001", "10", "10-1"]);
-CAB_14_ROUTES.set("11", ["14", "12-1", "11"]);
-CAB_14_ROUTES.set("12", ["14", "12-1", "12-2"]);
-CAB_14_ROUTES.set("13", ["14", "12-1", "12-2", "12-3", "13"]);
-CAB_14_ROUTES.set("15", ["14", "12-1", "12", "15", "15-1"]);
-CAB_14_ROUTES.set("16", ["14", "12-1", "12", "001", "000", "002", "16", "16-1"]);
-
-ROUTES.set("14", CAB_14_ROUTES);
-
-CAB_15_ROUTES = new Map();
-
-CAB_15_ROUTES.set("1", ["15-1", "15", "001", "000", "002", "003", "004"]);
-CAB_15_ROUTES.set("2", ["15-1", "15", "001", "000", "002", "003", "2"]);
-CAB_15_ROUTES.set("3", ["15-1", "15", "001", "000", "002", "003", "3"]);
-CAB_15_ROUTES.set("4", ["15-1", "15", "001", "000", "002", "003", "4"]);
-CAB_15_ROUTES.set("5", ["15-1", "15", "001", "000", "5", "5-1"]);
-CAB_15_ROUTES.set("7", ["15-1", "15", "001", "000", "5", "5-1", "5-2", "7"]);
-CAB_15_ROUTES.set("8", ["15-1", "15", "001", "000", "002", "8"]);
-CAB_15_ROUTES.set("9", ["15-1", "15", "9"]);
-CAB_15_ROUTES.set("10", ["15-1", "15", "001", "10", "10-1"]);
-CAB_15_ROUTES.set("11", ["15-1", "15", "12", "11"]);
-CAB_15_ROUTES.set("12", ["15-1", "15", "12", "12-1", "12-2"]);
-CAB_15_ROUTES.set("13", ["15-1", "15", "12", "12-1", "12-2", "12-3", "13"]);
-CAB_15_ROUTES.set("14", ["15-1", "15", "12", "12-1", "14"]);
-CAB_15_ROUTES.set("16", ["15-1", "15", "001", "000", "002", "16", "16-1"]);
-
-ROUTES.set("15", CAB_15_ROUTES);
-
-CAB_16_ROUTES = new Map();
-
-CAB_16_ROUTES.set("1", ["16-1", "16", "003", "004"]);// выход с этажа
-CAB_16_ROUTES.set("2", ["16-1", "16", "003", "2", "2-1"]);
-CAB_16_ROUTES.set("3", ["16-1", "16", "003", "3"]);
-CAB_16_ROUTES.set("4", ["16-1", "16", "003", "4"]);
-CAB_16_ROUTES.set("5", ["16-1", "16", "002", "5", "5-1"]);
-CAB_16_ROUTES.set("6", ["16-1", "16", "003", "6"]);
-CAB_16_ROUTES.set("7", ["16-1", "16", "002", "5", "5-1", "5-2", "7"]);
-CAB_16_ROUTES.set("8", ["16-1", "16", "8"]);
-CAB_16_ROUTES.set("9", ["16-1", "16", "002", "000", "001", "9"]);
-CAB_16_ROUTES.set("10", ["16-1", "16", "002", "000", "10", "10-1"]);
-CAB_16_ROUTES.set("11", ["16-1", "16", "002", "000", "001", "12", "11"]);
-CAB_16_ROUTES.set("12", ["16-1", "16", "002", "000", "001", "12", "12-1"]);
-CAB_16_ROUTES.set("13", ["16-1", "16", "002", "000", "001", "12", "12-1", "12-2", "12-3", "13"]);
-CAB_16_ROUTES.set("14", ["16-1", "16", "002", "000", "001", "12", "12-1", "14"]);
-CAB_16_ROUTES.set("15", ["16-1", "16", "002", "000", "001", "15", "15-1"]);
-
-ROUTES.set("16", CAB_16_ROUTES);
 
 class Cabinet {
     static destinationChecker = false;
@@ -243,6 +81,7 @@ function getClosestCheckpoint(currentCheckpoint) {
 function getCheckpoint(number) {
     return($('.checkPoint-' + number)[0]);
 }
+
 function movePerson(who, from, to) {
     who.stopPropagation(false);// как избавиться от этого?
 
@@ -378,7 +217,11 @@ function movePerson(who, from, to) {
     moveClass.doneCallback = () => {
         JQ_who = $(who.target).detach();
         JQ_who.appendTo($(to));
-        JQ_who[0].attributes[1].nodeValue+="background-color: black; filter: brightness(120%); top: 0!important; left: 0!important; transform: none;";
+        // состояние где маркер перешёл в другой кабинет
+        // тут убрал бекграунд-колор и фильтр: брайтнесс ибо они перезаписывают цвет иконки
+
+        JQ_who[0].attributes[1].nodeValue+="top: 0!important; left: 0!important; transform: none;";
+        console.log(JQ_who[0].attributes[1].nodeValue)
     }
 
 
@@ -405,12 +248,15 @@ function getCabFromPlaceholder(placeholder) {
     }
 }
 
-$('.placeholder').click((event) => {
-    let curEvent = event;
-    let curPlace = event.currentTarget;
-    // console.log(Cabinet.destinationChecker)
 
-    // curPlace = event.currentTarget;
+$('.placeholder').click((event) => {
+    let curPlace = event.currentTarget;
+
+    function randomColor() {
+        let number = Math.floor(Math.random() * (16_777_215));
+        return "#" + Number(number).toString(16)
+    }
+
     // condition for KORIDOR PARADNAYA PRIHOZHAYA
     if(!Cabinet.to) {
         if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
@@ -422,15 +268,17 @@ $('.placeholder').click((event) => {
             person.setAttribute("class", "person-icon");
 
             if(child1.children.length >= child2.children.length){
+                person.style = "background-color: " + randomColor();
                 child2.appendChild(person);
             } else {
+                person.style = "background-color: " + randomColor();
                 child1.appendChild(person);
             }
 
         } else {
             let person = document.createElement('div');
             person.setAttribute("class", "person-icon");
-
+            person.style = "background-color: " + randomColor();
             curPlace.appendChild(person);
         }
     }
@@ -439,7 +287,8 @@ $('.placeholder').click((event) => {
     $(".person-icon").on("click", (event) => {
         Cabinet.to = true;
         Cabinet.personToMove = event;
-        event.target.style="background-color: #fbfbfb; filter: brightness(120%);";
+        // убрал эту строчку так как она перезаписывает картинку но для показа наверн сойдёт
+        event.target.style += "background-color: #fbfbfb; filter: brightness(120%);";
     });
 });
 
@@ -487,7 +336,7 @@ $(".move").on("click", (event) => {
     }
 });
 
-$('.preview').click((event) => {
+$('.preview').click(() => {
 
     var el = document.getElementById("4-floor");
     el.classList.remove("display"); // удалить класс «class-name»
@@ -501,14 +350,9 @@ $('.preview').click((event) => {
 
     var el4 = document.getElementById("intro");
     el4.classList.add("text-display");
-
 })
 
 $(document).ready(() => {
     initCheckpoints();
     initCabinets();
 })
-
-window.onresize = function( event ) {
-    
-};

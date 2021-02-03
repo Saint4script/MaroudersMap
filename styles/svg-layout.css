@@ -9,7 +9,7 @@
     --door: #072153;
     --wall-thickness: 8;
     --door-thickness: 4;
-    --back-image: url("../image/intro.jpg");
+    --back-image: url("../images/intro.jpg");
 }
 
 .site-preview {
@@ -17,7 +17,7 @@
     transition: 2s;
 }
 
-
+/*при размера окна больше чем максимальное появляется пустое место как фиксить?*/
 .preview {
     background: var(--back-image);
     background-size: 100% 100%;
@@ -26,11 +26,12 @@
 }
 
 .floor-4-map-display {
-    transition:  ease-in-out 4s;
+    transition:  ease-in-out 3s;
 }
 
 .map-texture {
-    --back-image: url("../image/perfect.jpg");
+    --back-image: url("../images/perfect.jpg");
+    background-size: 100% 100%;
     transition:  ease-in-out 2s;
 }
 
@@ -41,11 +42,30 @@
 .text {
     position: absolute;
     text-align: center;
-    font-size: 60px;
-    margin:0 10% 0 10%;
-    width:80%;
+    font-size: 70px;
+    /*margin:0 10% 0 10%;
+    width:80%;*/
+    width: 100%;
     padding-top: 10%;
     font-family: 'MedievalSharp', cursive;
+}
+
+@media (max-width: 2000px) {
+    .text {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .text {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .text {
+        font-size: 40px;
+    }
 }
 
 .text-display {
@@ -54,41 +74,39 @@
 }
 
 @-webkit-keyframes textDisplay {
-    0%{
+    0% {
         opacity: 1;
     }
-    50%{
+    50% {
         opacity: 0.5;
     }
-    100%{
+    100% {
         opacity: 0;
     }
-
 }
 
-
 .floor-4-wrapper {
-    width: 100vw;
+    /*max-width: 2540px;
+    max-height: 1440px;
+    margin: 0 10% 0 10%;*/
+    width: 100%;
     height: 100vh;
     position: relative;
 }
 
-
 .svg-wrapper {
     background-position: 0 0;
     background-size: cover;
-    padding: 70px;
-    width: 100%;
+    width:100%;
     height: 100%;
+    padding: 10.1744186vh 5.46875vw;
     position: absolute;
 }
-
 
 svg {
     width: 100%;
     height: 100%;
 }
-
 
 form {
     z-index: 100;
@@ -105,4 +123,3 @@ form button {
     border-radius: 50%;
     display: inline-block;
 }
-
