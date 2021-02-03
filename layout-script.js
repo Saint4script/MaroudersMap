@@ -3,6 +3,48 @@ const HEI = 688;// высота
 CABINETS = []
 let CHECKPOINTS = []
 
+$('.preview').click((event) => {
+
+    var el = document.getElementById("4-floor");
+    el.classList.remove("display"); // удалить класс «class-name»
+    el.classList.add("floor-4-map-display");
+
+    var el2 = document.getElementById("background");
+    el2.classList.add("map-texture");
+
+    var el3 = document.getElementById("grid-for-help");
+    el3.classList.remove("display");
+
+    var el4 = document.getElementById("intro");
+    el4.classList.add("text-display");
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Cabinet {
     static destinationChecker = false;
     static personToMove;
@@ -14,25 +56,25 @@ class Cabinet {
         this.coeffs = coeffs;
     }
 
-    static getCoeffs(cabinet) {
-        let koeffs =[];
-        for (let j = 0; j < cabinet.points.length; j++) {
-            let currentPair = [];
-
-            currentPair.push(cabinet.points[j].x / WID);
-            currentPair.push(cabinet.points[j].y / HEI);
-            koeffs.push(currentPair);
-        }
-        return koeffs
-    }
+    // static getCoeffs(cabinet) {
+    //     let koeffs =[];
+    //     for (let j = 0; j < cabinet.points.length; j++) {
+    //         let currentPair = [];
+    //
+    //         currentPair.push(cabinet.points[j].x / WID);
+    //         currentPair.push(cabinet.points[j].y / HEI);
+    //         koeffs.push(currentPair);
+    //     }
+    //     return koeffs
+    // }
 }
 
-function initCabinets() {
-    let cabs = $(".svg-wrapper svg").children();
-    for(let i = 0; i < cabs.length; i++) {
-        CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
-    }
-}
+// function initCabinets() {
+//     let cabs = $(".svg-wrapper svg").children();
+//     for(let i = 0; i < cabs.length; i++) {
+//         CABINETS.push(new Cabinet(cabs[i], Cabinet.getCoeffs(cabs[i])))
+//     }
+// }
 function initCheckpoints() {
     CHECKPOINTS = $(".grid-map").children(".checkpoint");
 }
@@ -306,10 +348,10 @@ $(".move").on("click", (event) => {
 
 $(document).ready(() => {
     initCheckpoints();
-    initCabinets();
+    // initCabinets();
     resizeCabs();
 })
 
-window.onresize = function( event ) {
-    resizeCabs();
-};
+// window.onresize = function( event ) {
+//     resizeCabs();
+// };
