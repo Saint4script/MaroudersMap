@@ -23,8 +23,8 @@
 
 .person-icon {
     background-color: black;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     margin: 0.2em;
     left: auto;
@@ -69,17 +69,17 @@
 }
 
 .checkPoint-5-1 {
-    grid-column-start: 33;
-    grid-column-end: 34;
-    grid-row-start: 10;
-    grid-row-end: 11;
+    grid-column-start: 32;
+    grid-column-end: 33;
+    grid-row-start: 8;
+    grid-row-end: 9;
 }
 
 .checkPoint-5-2 {
-    grid-column-start: 37;
-    grid-column-end: 38;
-    grid-row-start: 3;
-    grid-row-end: 4;
+    grid-column-start: 36;
+    grid-column-end: 37;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 .checkPoint-6 {
@@ -117,11 +117,39 @@
     grid-row-end: 16;
 }
 
+.checkPoint-10-1 {
+    grid-column-start: 23;
+    grid-column-end: 24;
+    grid-row-start: 11;
+    grid-row-end: 12;
+}
+
 .checkPoint-11 {
     grid-column-start: 18;
     grid-column-end: 19;
     grid-row-start: 21;
     grid-row-end: 22;
+}
+
+.checkPoint-12-1 {
+    grid-column-start: 13;
+    grid-column-end: 14;
+    grid-row-start: 23;
+    grid-row-end: 24;
+}
+
+.checkPoint-12-2 {
+    grid-column-start: 10;
+    grid-column-end: 11;
+    grid-row-start: 24;
+    grid-row-end: 25;
+}
+
+.checkPoint-12-3 {
+    grid-column-start: 7;
+    grid-column-end: 8;
+    grid-row-start: 24;
+    grid-row-end: 25;
 }
 
 .checkPoint-12 {
@@ -167,10 +195,10 @@
 }
 
 .checkPoint-000 {
-    grid-column-start: 28;
-    grid-column-end: 29;
-    grid-row-start: 19;
-    grid-row-end: 20;
+    grid-column-start: 29;
+    grid-column-end: 30;
+    grid-row-start: 18;
+    grid-row-end: 19;
 }
 
 .checkPoint-001 {
@@ -183,6 +211,20 @@
 .checkPoint-002 {
     grid-column-start: 32;
     grid-column-end: 33;
+    grid-row-start: 18;
+    grid-row-end: 19;
+}
+
+.checkPoint-003 {
+    grid-column-start: 41;
+    grid-column-end: 42;
+    grid-row-start: 18;
+    grid-row-end: 19;
+}
+
+.checkPoint-004 {
+    grid-column-start: 54;
+    grid-column-end: 55;
     grid-row-start: 18;
     grid-row-end: 19;
 }
