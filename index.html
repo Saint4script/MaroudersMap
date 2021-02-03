@@ -6,16 +6,25 @@
     <link rel="icon" href="image/favi.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/svg-layout.css">
     <link rel="stylesheet" href="styles/4floor-cover-grid-layout.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <title>Marodeur`s Map</title>
 </head>
-<body background="image/perfect.jpg">
+<body class="preview" id="background">
+
+    <div class="text" id="intro">
+        <p> Not everyone can handle with it</p>
+        <p> But if try a lot </p>
+        <p> You will see</p>
+        <p> That everything is in front of you, just click</p>
+    </div>
 
 <!--    Основной тег, содержащий в себе все элементы для отрисовки карты 4 этажа офиса компании -->
-<div class="floor-4-wrapper">
+<div class="floor-4-wrapper display" id="4-floor" >
     <!--    Покрывающая сетка: Содержит блоки, внутри которых располагаются маркеры сотрудников при их появлении.
             Для каждого кабинета свой блок.-->
-    <div class="grid-map">
+    <div class="grid-map display" id="grid-for-help">
 
         <div class="cab-1-place ">
             <div class="cab-1-1-place placeholder"></div>

@@ -9,7 +9,63 @@
     --door: #072153;
     --wall-thickness: 8;
     --door-thickness: 4;
+    --back-image: url("../image/intro.jpg");
 }
+
+.site-preview {
+    opacity:0;
+    transition: 2s;
+}
+
+
+.preview {
+    background: var(--back-image);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+.floor-4-map-display {
+    transition:  ease-in-out 4s;
+}
+
+.map-texture {
+    --back-image: url("../image/perfect.jpg");
+    transition:  ease-in-out 2s;
+}
+
+.display {
+    opacity: 0;
+}
+
+.text {
+    position: absolute;
+    text-align: center;
+    font-size: 60px;
+    margin:0 10% 0 10%;
+    width:80%;
+    padding-top: 10%;
+    font-family: 'MedievalSharp', cursive;
+}
+
+.text-display {
+    animation: textDisplay 1s;
+    opacity: 0;
+}
+
+@-webkit-keyframes textDisplay {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+    }
+
+}
+
 
 .floor-4-wrapper {
     width: 100vw;
@@ -17,10 +73,6 @@
     position: relative;
 }
 
-body {
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
 
 .svg-wrapper {
     background-position: 0 0;
@@ -31,9 +83,6 @@ body {
     position: absolute;
 }
 
-.map {
-    opacity: 0.5;
-}
 
 svg {
     width: 100%;
@@ -56,3 +105,4 @@ form button {
     border-radius: 50%;
     display: inline-block;
 }
+

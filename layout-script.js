@@ -375,6 +375,23 @@ $(".move").on("click", (event) => {
     }
 });
 
+$('.preview').click((event) => {
+
+    var el = document.getElementById("4-floor");
+    el.classList.remove("display"); // удалить класс «class-name»
+    el.classList.add("floor-4-map-display");
+
+    var el2 = document.getElementById("background");
+    el2.classList.add("map-texture");
+
+    var el3 = document.getElementById("grid-for-help");
+    el3.classList.remove("display");
+
+    var el4 = document.getElementById("intro");
+    el4.classList.add("text-display");
+
+})
+
 $(document).ready(() => {
     initCheckpoints();
     initCabinets();
