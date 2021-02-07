@@ -90,11 +90,36 @@ function movePerson(who, from, to) {
     let pathFromID = from.classList[0].split('-')[1];
     let pathToID = to.classList[0].split('-')[1];
     
-    let pathStringsID = ROUTES.get(pathFromID).get(pathToID);
-    for(let i = 0; i < pathStringsID.length; i++) {
-        path.push($('.checkPoint-'+pathStringsID[i])[0]);
+    // при перемещении из 1 в 1, то нужно выкидывать на лестницу, а не в 1 каб (ну либо по блокам 1-1, 1-2)
+    if(from.classList[0] == "cab-1-place") {
+
+        let jq_who = $(who.target);
+        let jq_whoParentNode = jq_who.parent()[0];
+
+        if(jq_whoParentNode.classList[0] == "cab-1-1-place") {
+
+            let pathStringsID = ROUTES.get("1_1").get(pathToID);
+
+            for(let i = 0; i < pathStringsID.length; i++) {
+                path.push($('.checkPoint-'+pathStringsID[i])[0]);
+            }
+        } else if (jq_whoParentNode.classList[0] == "cab-1-2-place") {
+            console.log(pathToID);
+            console.log(ROUTES.get("1_2"));
+            let pathStringsID = ROUTES.get("1_2").get(pathToID);
+
+            for(let i = 0; i < pathStringsID.length; i++) {
+                path.push($('.checkPoint-'+pathStringsID[i])[0]);
+            }
+        }
+
+    }else {
+        let pathStringsID = ROUTES.get(pathFromID).get(pathToID);
+
+        for(let i = 0; i < pathStringsID.length; i++) {
+            path.push($('.checkPoint-'+pathStringsID[i])[0]);
+        }
     }
-    console.log(path);
 
     // removing person-item from parent to make it able to move 
     let x = $(who.target)[0].offsetLeft;
@@ -164,11 +189,14 @@ function movePerson(who, from, to) {
          * Move to point
          */
         _moveToPoint(x, y) {
-            let animTime = 1000;
             // save context for call next()
             const self = this;
+            // calc move time
+            const t = parseInt(self.movingNode.style.top) || 0;
+            const l = parseInt(self.movingNode.style.left) || 0;
+            let time = Math.sqrt((l-x) * (l-x) + (t-y) * (t-y)) * 25;
             animate({
-                duration: animTime,
+                duration: time,
                 draw(progress) {
                     const node = self.movingNode;
                     //get current position
@@ -181,7 +209,7 @@ function movePerson(who, from, to) {
                         progress * (xTrans)
                     }px, ${progress * (yTrans)}px, 0)`;
                     if (progress === 1) {
-                        // set finish posotion, reset transition
+                        // set finish position, reset transition
                         node.style.top = `${y}px`;
                         node.style.left = `${x}px`;
                         node.style.transform = ``;
@@ -215,6 +243,8 @@ function movePerson(who, from, to) {
     const moveClass = new Move(JQ_who[0]);
 
     moveClass.doneCallback = () => {
+        // здесь нужно подождать, пока произойдет анимация исчезания, прикрепить "прозрачный "
+        // элемент к родителю и запустить анимацию появления
         JQ_who = $(who.target).detach();
         JQ_who.appendTo($(to));
         // состояние где маркер перешёл в другой кабинет
@@ -293,15 +323,11 @@ $('.placeholder').click((event) => {
 });
 
 $(".move").on("click", (event) => {
-    // Cabinet.destinationChecker = true;
-    // if(Cabinet.destinationChecker) {
-    //     move(event, curPlace);
-    //     Cabinet.destinationChecker = false;
-    // }
     let fromPlaceholderName;
     let fromPlaceholder;
     let destinationPlaceholderName;
     let destinationPlaceholder;
+
     if(Cabinet.personToMove.currentTarget) {
         let we = $(".to input[type='radio']");
         for(let i = 0; i < we.length; i++) {

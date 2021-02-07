@@ -89,9 +89,22 @@
     /*max-width: 2540px;
     max-height: 1440px;
     margin: 0 10% 0 10%;*/
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     position: relative;
+}
+
+.floor-5-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.floor-5-container {
+    width: 200vw;
+    height: 100vh;
+    overflow-x: scroll;
 }
 
 .svg-wrapper {
