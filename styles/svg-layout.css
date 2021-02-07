@@ -98,13 +98,13 @@
     width: 100vw;
     height: 100vh;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: scroll;
 }
 
 .floor-5-container {
     width: 200vw;
     height: 100vh;
-    overflow-x: scroll;
+    
 }
 
 .svg-wrapper {
