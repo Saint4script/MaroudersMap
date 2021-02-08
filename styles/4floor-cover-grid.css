@@ -1,39 +1,23 @@
-/*  Классы, для таких сущностей как: Покрывающая сетка, блок заполняемый маркерами, маркер*/
+/*  ====================  */
+/*  Класс сетки 4 этажа   */
+/*  ====================  */
+
 .grid-map {
     display: grid;
     grid-template-columns: repeat(54, 1fr);
     grid-template-rows: repeat(34, 1fr);
-
     width: 100%;
     height: 100%;
     padding: 10.1744186vh 5.46875vw;
     position: absolute;
 }
-.placeholder {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    color: white;
-    padding: 0.5em;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
 
-.person-icon {
-    background-color: black;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    margin: 0.2em;
-    left: auto;
-}
-
-
+/*  =================================================   */
 /*  Классы описывающие блоки, заполняющиеся маркерами   */
+/*  =================================================   */
+
 /*  Шаблон для атрибута grid-area: row-start / column-start / row-end / column-end;  */
+
 .cab-1-place {
     display: grid;
     grid-template-columns: repeat(30, 1fr);
@@ -42,91 +26,73 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    /* background-color: teal; */
 }
 
 .cab-1-1-place {
     grid-area: 1 / 1 / 11 / 8;
     z-index: 2;
-    /*background-color: #5fe912;*/
 }
 .cab-1-2-place {
     grid-area: 1 / 16 / 7 / 31;
     z-index: 2;
-    /*background-color: tan;*/
 }
 
 .cab-2-place {
     grid-area: 1 / 49 / 9 / 55;
-    /*background-color: #cfda2f;*/
 }
 
 .cab-3-place {
     grid-area: 4 / 45 / 13 / 49;
-    /*background-color: #aab9aa;*/
 }
 
 .cab-4-place {
     grid-area: 13 / 48 / 15 / 52;
-    /*background-color: #ffae00;*/
 }
 
 .cab-5-place {
     grid-area: 1 / 31 / 12 / 40;
-    /*background-color: #2f40da;*/
 }
 
 .cab-6-place {
     grid-area: 4 / 40 / 15 / 44;
-    /*background-color: #2fda2f;*/
 }
 
 .cab-7-place {
     grid-area: 1 / 44 / 4 / 49;
-    /*background-color: #8ada2f;*/
 }
 
 .cab-8-place {
     grid-area: 12 / 34 / 17 / 40;
-    /*background-color: #c79a9a;*/
 }
 
 .cab-9-place {
     grid-area: 15 / 20 / 22 / 25;
-    /*background-color: #96de60;*/
 }
 
 .cab-10-place {
     grid-area: 2 / 1 / 15 / 31;
-    /*background-color: #e702ec;*/
 }
 
 .cab-11-place {
     grid-area: 15 / 17 / 21 / 20;
-    /*background-color: #ffae00;*/
 }
 
 .cab-12-place {
     grid-area: 21 / 1 / 35 / 16;
-    /*background-color: #dea11d;*/
 }
 
 .cab-13-place {
     grid-area: 15 / 1 / 21 / 9;
-    /*background-color: #db8a8a;*/
 }
 
 .cab-14-place {
     grid-area: 15 / 9 / 21 / 17;
-    /*background-color: #5d3960;*/
 }
 
 .cab-15-place {
     grid-area: 25 / 16 / 35 / 32;
-    /*background-color: #011d0d;*/
 }
 
 .cab-16-place {
     grid-area: 21 / 32 / 35 / 41;
-    /*background-color: #ce99d9;*/
 }

@@ -1,12 +1,31 @@
-/*  Классы описывающие чекпоинты для переджвижения маркера(сотрудника) по карте.    */
+/*  =============================================================================  */
+/*  Классы описывающие чекпоинты для переджвижения маркера(сотрудника) по 4 этажу  */
+/*  =============================================================================  */
+
 /*  Шаблон для атрибута grid-area: row-start / column-start / row-end / column-end;  */
 
-.checkpoint {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(255, 0, 0);
-    border-radius: 50%;
-    z-index: 2;
+.checkPoint-000 {
+    grid-area: 18 / 29 / 19 / 30;
+}
+
+.checkPoint-001 {
+    grid-area: 22 / 27 / 23 / 28;
+}
+
+.checkPoint-002 {
+    grid-area: 18 / 32 / 19 / 33;
+}
+
+.checkPoint-003 {
+    grid-area: 18 / 41 / 19 / 42;
+}
+
+.checkPoint-004 {
+    grid-area: 18 / 54 / 19 / 55;
+}
+
+.checkPoint-005 {
+    grid-area: 18 / 47 / 19 / 48;
 }
 
 .checkPoint-2 {
@@ -108,28 +127,3 @@
 .checkPoint-16-1 {
     grid-area: 23 / 36 / 24 / 37;
 }
-
-.checkPoint-000 {
-    grid-area: 18 / 29 / 19 / 30;
-}
-
-.checkPoint-001 {
-    grid-area: 22 / 27 / 23 / 28;
-}
-
-.checkPoint-002 {
-    grid-area: 18 / 32 / 19 / 33;
-}
-
-.checkPoint-003 {
-    grid-area: 18 / 41 / 19 / 42;
-}
-
-.checkPoint-004 {
-    grid-area: 18 / 54 / 19 / 55;
-}
-
-.checkPoint-005 {
-    grid-area: 18 / 47 / 19 / 48;
-}
-

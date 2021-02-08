@@ -283,7 +283,7 @@ $('.placeholder').click((event) => {
     let curPlace = event.currentTarget;
 
     function randomColor() {
-        let number = Math.floor(Math.random() * (16_777_215));
+        let number = Math.floor(Math.random() * (10_777_215) + 3_000_000);
         return "#" + Number(number).toString(16)
     }
 
@@ -365,7 +365,7 @@ $(".move").on("click", (event) => {
 $('.preview').click(() => {
 
     var el = document.getElementById("4-floor");
-    el.classList.remove("display"); // удалить класс «class-name»
+    el.classList.remove("display");
     el.classList.add("floor-4-map-display");
 
     var el2 = document.getElementById("background");

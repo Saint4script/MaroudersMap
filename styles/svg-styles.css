@@ -1,3 +1,7 @@
+/*  =================   */
+/*  Глобальные классы   */
+/*  =================   */
+
 *{
     padding: 0;
     margin: 0;
@@ -12,17 +16,25 @@
     --back-image: url("../images/intro.jpg");
 }
 
+@font-face {
+    font-family: MedievalSharp;
+    src: url('../font/MedievalSharp-Regular.ttf');
+}
+
+
+/*  =======================================================   */
+/*  Классы ответственные за анимацию вступительной страницы   */
+/*  =======================================================   */
+
 .site-preview {
     opacity:0;
     transition: 2s;
 }
 
-/*при размера окна больше чем максимальное появляется пустое место как фиксить?*/
 .preview {
     background: var(--back-image);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-
 }
 
 .floor-4-map-display {
@@ -43,8 +55,6 @@
     position: absolute;
     text-align: center;
     font-size: 70px;
-    /*margin:0 10% 0 10%;
-    width:80%;*/
     width: 100%;
     padding-top: 10%;
     font-family: 'MedievalSharp', cursive;
@@ -85,41 +95,10 @@
     }
 }
 
-.floor-4-wrapper {
-    /*max-width: 2540px;
-    max-height: 1440px;
-    margin: 0 10% 0 10%;*/
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-}
 
-.floor-5-wrapper {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow-x: scroll;
-}
-
-.floor-5-container {
-    width: 200vw;
-    height: 100vh;
-    
-}
-
-.svg-wrapper {
-    background-position: 0 0;
-    background-size: cover;
-    width:100%;
-    height: 100%;
-    padding: 10.1744186vh 5.46875vw;
-    position: absolute;
-}
-
-svg {
-    width: 100%;
-    height: 100%;
-}
+/*  ===============================   */
+/*  Классы дополнительных элементов   */
+/*  ===============================   */
 
 form {
     z-index: 100;
