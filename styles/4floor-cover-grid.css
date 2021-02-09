@@ -2,7 +2,7 @@
 /*  Класс сетки 4 этажа   */
 /*  ====================  */
 
-.grid-map {
+.grid-map-floor4 {
     display: grid;
     grid-template-columns: repeat(54, 1fr);
     grid-template-rows: repeat(34, 1fr);

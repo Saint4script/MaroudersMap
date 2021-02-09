@@ -2,7 +2,12 @@
 /*  Класс сетки 5 этажа   */
 /*  ====================  */
 
-
-
-
-/* Put your code here  */
+.grid-map-floor5 {
+    display: grid;
+    grid-template-columns: repeat(80, 1fr);
+    grid-template-rows: repeat(23, 1fr);
+    width: 200%;
+    height: 100%;
+    padding: 10.1744186vh 5.46875vw;
+    position: absolute;
+}
