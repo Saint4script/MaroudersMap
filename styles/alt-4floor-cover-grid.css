@@ -6,7 +6,6 @@
     display: grid;
     grid-template-columns: repeat(54, 1fr);
     grid-template-rows: repeat(34, 1fr);
-    max-width: 2540px;
     width: 100%;
     height: 100%;
     padding: 10.1744186vh 5.46875vw;
@@ -19,7 +18,7 @@
 
 /*  Шаблон для атрибута grid-area: row-start / column-start / row-end / column-end;  */
 
-.cab-1-place {
+/* .cab-1-place {
     display: grid;
     grid-template-columns: repeat(30, 1fr);
     grid-template-rows: repeat(10, 1fr);
@@ -27,19 +26,50 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+} */
+
+.cab-1-0-place {
+    grid-area: 22 / 20 / 25 / 23;
 }
 
 .cab-1-1-place {
-    grid-area: 1 / 1 / 11 / 8;
-    z-index: 2;
+    grid-area: 21 / 26 / 25 / 31;
 }
+
 .cab-1-2-place {
-    grid-area: 1 / 16 / 7 / 31;
-    z-index: 2;
+    grid-area: 15 / 26 / 21 / 31;
+}
+
+.cab-1-3-place {
+    grid-area: 15 / 31 / 21 / 34;
+}
+
+.cab-1-4-place {
+    grid-area: 17 / 34 / 21 / 39;
+}
+
+.cab-1-5-place {
+    grid-area: 15 / 42 / 21 / 45;
+}
+
+.cab-1-6-place {
+    grid-area: 15 / 45 / 21 / 48;
+}
+
+.cab-1-7-place {
+    grid-area: 15 / 48 / 21 / 52;
+}
+
+.cab-1-8-place {
+    grid-area: 15 / 52 / 21 / 55;
 }
 
 .cab-2-place {
     grid-area: 1 / 49 / 9 / 55;
+}
+
+.cab-2-1-place {
+    grid-area: 9 / 52 / 15 / 55;
 }
 
 .cab-3-place {
@@ -51,12 +81,24 @@
 }
 
 .cab-5-place {
-    grid-area: 1 / 31 / 12 / 40;
+    grid-area: 1 / 31 / 12 / 38;
+}
+
+.cab-5-0-place {
+    grid-area: 12 / 31 / 15 / 34;
+}
+
+.cab-5-1-place {
+    grid-area: 1 / 40 / 4 / 44;
 }
 
 .cab-6-place {
-    grid-area: 4 / 40 / 15 / 44;
+    grid-area: 5 / 40 / 13 / 45;
 }
+
+/* .cab-6-1-place {
+    grid-area: 11 / 42 / 15 / 45;
+} */
 
 .cab-7-place {
     grid-area: 1 / 44 / 4 / 49;
@@ -79,7 +121,23 @@
 }
 
 .cab-12-place {
-    grid-area: 21 / 1 / 35 / 16;
+    grid-area: 21 / 1 / 38 / 16;
+}
+
+.cab-12-4-place {
+    grid-area: 23 / 8 / 27 / 12;
+}
+
+.cab-12-1-place {
+    grid-area: 21 / 17 / 25 / 20;
+}
+
+.cab-12-2-place {
+    grid-area: 21 / 11 / 25 / 14;
+}
+
+.cab-12-3-place {
+    grid-area: 21 / 5 / 25 / 8;
 }
 
 .cab-13-place {

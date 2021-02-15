@@ -6,8 +6,44 @@
     display: grid;
     grid-template-columns: repeat(80, 1fr);
     grid-template-rows: repeat(23, 1fr);
+    max-width: 5080px;
     width: 200%;
     height: 100%;
     padding: 10.1744186vh 5.46875vw;
     position: absolute;
 }
+
+
+/*  =================================================   */
+/*  Классы описывающие блоки, заполняющиеся маркерами   */
+/*  =================================================   */
+
+/*  Шаблон для атрибута grid-area: row-start / column-start / row-end / column-end;  */
+
+.cab-17-place {
+    grid-area: 1 / 36 / 10 / 44;
+}
+
+/* 18 - hall will be later  */
+
+.cab-19-place {
+    grid-area: 1 / 32 / 7 / 36;
+}
+
+.cab-20-place {
+    grid-area: 1 / 29 / 9 / 32;
+}
+
+
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

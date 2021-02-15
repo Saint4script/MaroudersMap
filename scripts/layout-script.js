@@ -2,9 +2,100 @@ const WID = 1280;// ширина - для отношений с полигона
 const HEI = 688;// высота
 CABINETS = [];
 CHECKPOINTS = [];
+PERSONS = [];
 
-// ПЕРЕДЕЛАТЬ АПИ ПОД ТО, ЧТО У НАС НЕТ ТОЧКИ, ОТКУДА МЫ ИДЕМ ( ЭТО ПРОШЛАЯ КТ )
 // СДЕЛАТЬ АНИМАЦИЮ ИСЧЕЗНОВЕНИЯ ЭЛЕМЕНТА ПОСЛЕ ПРИХОДА В КОНЕЧНУЮ ТОЧКУ И ПЕРЕД АТТАЧЕМ
+
+
+class Person {
+    constructor(personID, personFullName, currentLocation) {
+        this.ID = personID;
+        this.fullName = personFullName;
+        this.location = currentLocation;
+    }
+}
+
+function isPersonIn(personID) {
+    PERSONS.forEach(element => {
+        if (element.ID == personID) {
+            // если человек уже существует, то true
+            return element;
+        }
+    });
+    return false;
+}
+
+function initPersons() {
+    fetch("http://127.0.0.1:8080/location.json", { mode: 'same-origin' })
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                // Examine the text in the response  
+                response.json().then((data) => {
+                    let keys = Object.keys(data);
+                    console.log(keys.length)
+
+                    keys.forEach((key) => {
+                        if (!isPersonIn(key)) {
+                            let personRawData = data[key];
+                            let personFullName = personRawData.full_fio;
+                            let currentLocation = personRawData.config_tree_id;
+
+                            currentPerson = new Person(key, personFullName, currentLocation);
+                            PERSONS.push(currentPerson);
+                        }
+                    });
+                    // console.log(PERSONS)
+                });
+
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+}
+
+async function getStateDiffs() {
+    let inner = await fetch("http://127.0.0.1:8080/location.json", { mode: 'same-origin' });
+    let data = await inner.json();
+
+    let keys = Object.keys(data);
+    let diffPersonStates = [];
+
+    keys.forEach((key) => {
+        let personToCheck = isPersonIn(key);
+        // нужно добавить человека в return, если его еще нет в PERSONS или если у него изменилась позиция
+
+        let personRawData = data[key];
+
+        if (!personToCheck) {
+            //если человека еще нет
+            let personFullName = personRawData.full_fio;
+            let currentLocation = personRawData.config_tree_id;
+
+            personToCheck = new Person(key, personFullName, currentLocation);
+            diffPersonStates.push(personToCheck);
+            // PERSONS.push(personToCheck);
+        } else {
+            PERSONS.forEach((person) => {
+                if(person.ID == key) {
+                    let currentLocation = personRawData.config_tree_id;
+
+                    if(person.location == currentLocation) {
+                        diffPersonStates.push(personToCheck);
+                    }
+                }
+            })
+        }
+        
+    })
+    // console.log(diffPersonStates)
+    return diffPersonStates;
+}
 
 class Cabinet {
     static destinationChecker = false;
@@ -18,7 +109,7 @@ class Cabinet {
     }
 
     static getCoeffs(cabinet) {
-        let koeffs =[];
+        let koeffs = [];
         for (let j = 0; j < cabinet.points.length; j++) {
             let currentPair = [];
             currentPair.push(cabinet.points[j].x / WID);
@@ -32,20 +123,16 @@ class Cabinet {
 function initCabinets() {
     let cabs = $(".svg-wrapper svg").children();
     let placeholders = $(".grid-map").children();
-    for(let i = 0; i < cabs.length; i++) {
+    for (let i = 0; i < cabs.length; i++) {
         CABINETS.push(new Cabinet(cabs[i], placeholders[i]))
     }
-}
-function initCheckpoints() {
-    CHECKPOINTS = $(".grid-map").children(".checkpoint");
-    // console.log(CHECKPOINTS)
 }
 
 // input: HTML-element, HTML-element
 function getDistance(obj1, obj2) {
     let objSize = obj1.getBoundingClientRect();
     let objSizeNext = obj2.getBoundingClientRect();
-    // console.log("x1: " + objSize.x + " y1: " + objSize.y + " x2: " + objSizeNext.x + " y2: " + objSizeNext.y)
+
     return Math.sqrt(
         (objSize.x - objSizeNext.x) * (objSize.x - objSizeNext.x) +
         (objSize.y - objSizeNext.y) * (objSize.y - objSizeNext.y));
@@ -57,13 +144,13 @@ function getClosestCheckpoint(currentCheckpoint) {
     let tmpCheckpoint;
     let dist = Number.MAX_SAFE_INTEGER;
 
-    for(let j = 0; j < CHECKPOINTS.length; j++ ) {
+    for (let j = 0; j < CHECKPOINTS.length; j++) {
         tmpCheckpoint = CHECKPOINTS[j];
-        if(tmpCheckpoint == currentCheckpoint) {
+        if (tmpCheckpoint == currentCheckpoint) {
             continue;
         } else {
             currDist = getDistance(currentCheckpoint, tmpCheckpoint);
-            if(currDist <= dist) {
+            if (currDist <= dist) {
                 closestCheckpoint = tmpCheckpoint;
                 dist = currDist;
             } else {
@@ -72,14 +159,14 @@ function getClosestCheckpoint(currentCheckpoint) {
                 // console.log("dist is: " + currDist)
             }
         }
-        
+
     }
 
     return closestCheckpoint;
 }
 
 function getCheckpoint(number) {
-    return($('.checkPoint-' + number)[0]);
+    return ($('.checkPoint-' + number)[0]);
 }
 
 function movePerson(who, from, to) {
@@ -87,47 +174,23 @@ function movePerson(who, from, to) {
 
     let path = [];
 
-    let pathFromID = from.classList[0].split('-')[1];
-    let pathToID = to.classList[0].split('-')[1];
-    
-    // при перемещении из 1 в 1, то нужно выкидывать на лестницу, а не в 1 каб (ну либо по блокам 1-1, 1-2)
-    if(from.classList[0] == "cab-1-place") {
+    let routeFinder = new FindShortRoute(roomMap);
+    let pathStringsID = routeFinder.findRoute(from, to);
 
-        let jq_who = $(who.target);
-        let jq_whoParentNode = jq_who.parent()[0];
 
-        if(jq_whoParentNode.classList[0] == "cab-1-1-place") {
+    pathStringsID.forEach(step => {
+        path.push($(`.cab-${step}-place`)[0]);
+    });
+    console.log(path);
 
-            let pathStringsID = ROUTES.get("1_1").get(pathToID);
+    // return;
 
-            for(let i = 0; i < pathStringsID.length; i++) {
-                path.push($('.checkPoint-'+pathStringsID[i])[0]);
-            }
-        } else if (jq_whoParentNode.classList[0] == "cab-1-2-place") {
-            console.log(pathToID);
-            console.log(ROUTES.get("1_2"));
-            let pathStringsID = ROUTES.get("1_2").get(pathToID);
-
-            for(let i = 0; i < pathStringsID.length; i++) {
-                path.push($('.checkPoint-'+pathStringsID[i])[0]);
-            }
-        }
-
-    }else {
-        let pathStringsID = ROUTES.get(pathFromID).get(pathToID);
-
-        for(let i = 0; i < pathStringsID.length; i++) {
-            path.push($('.checkPoint-'+pathStringsID[i])[0]);
-        }
-    }
-
-    // removing person-item from parent to make it able to move 
     let x = $(who.target)[0].offsetLeft;
     let y = $(who.target)[0].offsetTop;
     let JQ_who = $(who.target).detach();
 
     JQ_who.appendTo($('.floor-4-wrapper'));
-    JQ_who.offset ( {
+    JQ_who.offset({
         left: x,
         top: y
     });
@@ -158,7 +221,6 @@ function movePerson(who, from, to) {
         const list = path;
         moveClass.move(list);
     }
-    // console.log(JQ_who[0].style.top)
 
     class Move {
         static checker = false;
@@ -188,13 +250,20 @@ function movePerson(who, from, to) {
         /**
          * Move to point
          */
-        _moveToPoint(x, y) {
+        _moveToPoint(destinationPoint) {
             // save context for call next()
             const self = this;
+            let nextCoordinates = destinationPoint.getBoundingClientRect();
+            let x = nextCoordinates.x;
+            let y = nextCoordinates.y;
+            let correctionX = destinationPoint.offsetWidth / 2;
+            let correctionY = destinationPoint.offsetHeight / 2;
+
             // calc move time
             const t = parseInt(self.movingNode.style.top) || 0;
             const l = parseInt(self.movingNode.style.left) || 0;
-            let time = Math.sqrt((l-x) * (l-x) + (t-y) * (t-y)) * 25;
+            let time = Math.sqrt((l - x) * (l - x) + (t - y) * (t - y)) * 2;
+
             animate({
                 duration: time,
                 draw(progress) {
@@ -203,15 +272,14 @@ function movePerson(who, from, to) {
                     const top = parseInt(node.style.top) || 0;
                     const left = parseInt(node.style.left) || 0;
                     //calculate transition
-                    const xTrans = x - left;
-                    const yTrans = y - top;
-                    node.style.transform = `translate3d(${
-                        progress * (xTrans)
-                    }px, ${progress * (yTrans)}px, 0)`;
+                    const xTrans = x - left + correctionX - 10;
+                    const yTrans = y - top + correctionY - 10;
+                    node.style.transform = `translate3d(${progress * (xTrans)
+                        }px, ${progress * (yTrans)}px, 0)`;
                     if (progress === 1) {
                         // set finish position, reset transition
-                        node.style.top = `${y}px`;
-                        node.style.left = `${x}px`;
+                        node.style.top = `${y + correctionY - 10}px`;
+                        node.style.left = `${x + correctionX - 10}px`;
                         node.style.transform = ``;
                         self._next();
                     }
@@ -229,10 +297,10 @@ function movePerson(who, from, to) {
             const step = this.list[this.index];
 
             if (step) {
-                let nextCoordinates = step.getBoundingClientRect() || 0;
-                this._moveToPoint(nextCoordinates.x, nextCoordinates.y);
+                // let nextCoordinates = step.getBoundingClientRect() || 0;
+                this._moveToPoint(step);
             } else {
-                if ( typeof this.doneCallback === 'function') {
+                if (typeof this.doneCallback === 'function') {
                     this.doneCallback();
                 }
             }
@@ -246,14 +314,13 @@ function movePerson(who, from, to) {
         // здесь нужно подождать, пока произойдет анимация исчезания, прикрепить "прозрачный "
         // элемент к родителю и запустить анимацию появления
         JQ_who = $(who.target).detach();
-        JQ_who.appendTo($(to));
+        JQ_who.appendTo($(path[path.length - 1]));
         // состояние где маркер перешёл в другой кабинет
         // тут убрал бекграунд-колор и фильтр: брайтнесс ибо они перезаписывают цвет иконки
 
-        JQ_who[0].attributes[1].nodeValue+="top: 0!important; left: 0!important; transform: none;";
-        console.log(JQ_who[0].attributes[1].nodeValue)
-    }
+        JQ_who[0].attributes[1].nodeValue += "top: 0!important; left: 0!important; transform: none;";
 
+    }
 
     moveByList();
 
@@ -263,21 +330,20 @@ function movePerson(who, from, to) {
 
 function getCabFromPlaceholder(placeholder) {
 
-    for(let i = 0; i < CABINETS.length; i++) {
+    for (let i = 0; i < CABINETS.length; i++) {
         let placeholderName = placeholder.classList[0];
         // для имен классов дивов с 2-мя или 1-ой цифрой
-        if(placeholderName[6] == '-') {
-            if(CABINETS[i].cab.id === placeholder.classList[0].slice(0, 6)) {
+        if (placeholderName[6] == '-') {
+            if (CABINETS[i].cab.id === placeholder.classList[0].slice(0, 6)) {
                 return CABINETS[i];
             }
         } else {
-            if(CABINETS[i].cab.id === placeholder.classList[0].slice(0, 5)) {
+            if (CABINETS[i].cab.id === placeholder.classList[0].slice(0, 5)) {
                 return CABINETS[i];
             }
         }
     }
 }
-
 
 $('.placeholder').click((event) => {
     let curPlace = event.currentTarget;
@@ -288,31 +354,14 @@ $('.placeholder').click((event) => {
     }
 
     // condition for KORIDOR PARADNAYA PRIHOZHAYA
-    if(!Cabinet.to) {
-        if(curPlace.classList[0] == "cab-1-1-place" || curPlace.classList[0] == "cab-1-2-place") {
-
-            let child1 = $('.cab-1-1-place')[0];
-            let child2 = $('.cab-1-2-place')[0];
-
-            let person = document.createElement('div');
-            person.setAttribute("class", "person-icon");
-
-            if(child1.children.length >= child2.children.length){
-                person.style = "background-color: " + randomColor();
-                child2.appendChild(person);
-            } else {
-                person.style = "background-color: " + randomColor();
-                child1.appendChild(person);
-            }
-
-        } else {
-            let person = document.createElement('div');
-            person.setAttribute("class", "person-icon");
-            person.style = "background-color: " + randomColor();
-            curPlace.appendChild(person);
-        }
+    if (!Cabinet.to) {
+        let person = document.createElement('div');
+        let personObject = new Person(person);
+        console.log(personObject);
+        person.setAttribute("class", "person-icon");
+        person.style = "background-color: " + randomColor();
+        curPlace.appendChild(person);
     }
-
 
     $(".person-icon").on("click", (event) => {
         Cabinet.to = true;
@@ -328,57 +377,171 @@ $(".move").on("click", (event) => {
     let destinationPlaceholderName;
     let destinationPlaceholder;
 
-    if(Cabinet.personToMove.currentTarget) {
+    if (Cabinet.personToMove.currentTarget) {
         let we = $(".to input[type='radio']");
-        for(let i = 0; i < we.length; i++) {
-            if(we[i].checked) {
+        for (let i = 0; i < we.length; i++) {
+            if (we[i].checked) {
                 destinationPlaceholderName = we[i].value;
             }
         }
-        if(destinationPlaceholderName[6] == '-') {
-            destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 7)}` + "place")[0];
-        } else {
-            destinationPlaceholder = $(`.${destinationPlaceholderName.slice(0, 6)}` + "place")[0];
-        }
 
         we = $(".from input[type='radio']");
-        for(let i = 0; i < we.length; i++) {
-            if(we[i].checked) {
+        for (let i = 0; i < we.length; i++) {
+            if (we[i].checked) {
                 fromPlaceholderName = we[i].value;
             }
         }
 
-        if(fromPlaceholderName[6] == '-') {
-            fromPlaceholder = $(`.${fromPlaceholderName.slice(0, 7)}` + "place")[0];
-        } else {
-            fromPlaceholder = $(`.${fromPlaceholderName.slice(0, 6)}` + "place")[0];
-        }
+        let fromIndex = fromPlaceholderName.slice(4, fromPlaceholderName.length - 5);
+        fromPlaceholder = $(`.cab-${fromIndex}-place`)[0];
+
+        let toIndex = destinationPlaceholderName.slice(4, destinationPlaceholderName.length - 3);
+        destinationPlaceholder = $(`.cab-${toIndex}-place`)[0];
 
         movePerson(
             Cabinet.personToMove,
-            fromPlaceholder,
-            destinationPlaceholder
+            fromIndex,
+            toIndex
         )
     }
 });
 
-$('.preview').click(() => {
+function personOnChangeState(person, fromID, toID) {
 
-    var el = document.getElementById("4-floor");
-    el.classList.remove("display");
-    el.classList.add("floor-4-map-display");
+    // добавление человека в карту
+    let curPlace = event.currentTarget;
 
-    var el2 = document.getElementById("background");
-    el2.classList.add("map-texture");
+    function randomColor() {
+        let number = Math.floor(Math.random() * (10_777_215) + 3_000_000);
+        return "#" + Number(number).toString(16)
+    }
 
-    var el3 = document.getElementById("grid-for-help");
-    el3.classList.remove("display");
+    // condition for KORIDOR PARADNAYA PRIHOZHAYA
+    if (!Cabinet.to) {
+        let person = document.createElement('div');
+        let personObject = new Person(person);
+        console.log(personObject);
+        person.setAttribute("class", "person-icon");
+        person.style = "background-color: " + randomColor();
+        curPlace.appendChild(person);
+    }
 
-    var el4 = document.getElementById("intro");
-    el4.classList.add("text-display");
-})
+    $(".person-icon").on("click", (event) => {
+        Cabinet.to = true;
+        Cabinet.personToMove = event;
+        // убрал эту строчку так как она перезаписывает картинку но для показа наверн сойдёт (делает маркер черным по клику)
+        event.target.style += "background-color: #fbfbfb; filter: brightness(120%);";
+    });
+
+    // вызов движения
+    let fromPlaceholderName;
+    let fromPlaceholder;
+    let destinationPlaceholderName;
+    let destinationPlaceholder;
+
+    if (Cabinet.personToMove.currentTarget) {
+        let we = $(".to input[type='radio']");
+        for (let i = 0; i < we.length; i++) {
+            if (we[i].checked) {
+                destinationPlaceholderName = we[i].value;
+            }
+        }
+
+        we = $(".from input[type='radio']");
+        for (let i = 0; i < we.length; i++) {
+            if (we[i].checked) {
+                fromPlaceholderName = we[i].value;
+            }
+        }
+
+        let fromIndex = fromPlaceholderName.slice(4, fromPlaceholderName.length - 5);
+        fromPlaceholder = $(`.cab-${fromIndex}-place`)[0];
+
+        let toIndex = destinationPlaceholderName.slice(4, destinationPlaceholderName.length - 3);
+        destinationPlaceholder = $(`.cab-${toIndex}-place`)[0];
+
+        movePerson(
+            Cabinet.personToMove,
+            fromIndex,
+            toIndex
+        )
+    }
+
+}
+
+// $('.preview').click(() => {
+
+//     var el = document.getElementById("4-floor");
+//     el.classList.remove("display");
+//     el.classList.add("floor-4-map-display");
+
+//     var el2 = document.getElementById("background");
+//     el2.classList.add("map-texture");
+
+//     var el3 = document.getElementById("grid-for-help");
+//     el3.classList.remove("display");
+
+//     var el4 = document.getElementById("intro");
+//     el4.classList.add("text-display");
+// })
 
 $(document).ready(() => {
-    initCheckpoints();
+    // console.log("n");
     initCabinets();
+    initPersons();
+    // doSome();
+    // console.log("n");
+    // console.log(PERSONS);
+    // doSome();
+    // doSome();
+    console.log(PERSONS);
+    let timerId = setInterval(() => {
+        // console.log("tik tak")
+        console.log(PERSONS);
+        doSome();
+        console.log(PERSONS);
+    }, 5000);
+    setTimeout(() => { clearInterval(timerId); alert('stop'); }, 16000);
 })
+
+async function doSome() {
+
+    await getStateDiffs().then(diffs => {
+        if (diffs.length != 0) {
+            // console.log("diffs true: ", Object.keys(diffs));
+
+            let keys = Object.keys(diffs);
+            // console.log("keys len: ", keys.length, " PERSONS len: ", PERSONS.length)
+
+            keys.forEach((key) => {
+                let currentPerson = diffs[key];
+
+                if (!isPersonIn(currentPerson)) {
+                    // если человек еще не создан (первый чек за день)
+                    console.log("Новый человечек")
+                    PERSONS.push(currentPerson);
+                } else {
+                    // если человек уже существует
+                    PERSONS.forEach((person) => {
+                        if (currentPerson.ID == person.ID) {
+                            // если текущий человек (из массива изменений) равен человеку из уже существующих
+                            if (!(currentPerson.location == person.location)) {
+                                // если локация человека изменилась
+                                console.log("person old location diff: " + person.location);
+                                console.log("person new location diff: " + currentPerson.location);
+                                person.location = currentPerson.location;
+                                console.log("3")
+                            } else {
+                                // если локация прежняя
+                                console.log("--")
+                            }
+                        }
+                    })
+                }
+            })
+        } else {
+            console.log("----------no diffs commited-----------");
+        }
+    });
+
+}

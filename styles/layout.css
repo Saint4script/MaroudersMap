@@ -39,29 +39,77 @@
 /*  Классы отвечающие за позиционированние карт 4 и 5 этажа  */
 /*  =======================================================  */
 
+
+body {
+    overflow-x: hidden;
+}
+
 .floor-4-wrapper {
+    display: flex;
     width: 100vw;
     height: 100vh;
     position: relative;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .floor-5-wrapper {
+    display: flex;
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow-x: scroll;
+    overflow-y: hidden;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .floor-5-container {
     width: 200vw;
     height: 100vh;
-
 }
+
+body::-webkit-scrollbar {
+    width: 45px;
+}
+
+body::-webkit-scrollbar-track {
+    background-image: url("../images/scroll-track.jpg");
+    background-repeat: no-repeat;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-image: url("../images/scroll.png");
+}
+
+/* Кастомизация нижнего скролла, нужна ли? */
+/*.floor-5-wrapper::-webkit-scrollbar {
+    height: 45px;
+}
+.floor-5-wrapper::-webkit-scrollbar-thumb {
+    background-image: url("../images/scroll-x.png");
+    background-repeat: no-repeat;
+}
+.floor-5-wrapper::-webkit-scrollbar-track {
+    background-image: url("../images/scroll-track-x.jpg");
+    background-repeat: no-repeat;
+}*/
 
 .svg-wrapper {
     background-position: 0 0;
     background-size: cover;
+    max-width: 2540px;
     width:100%;
+    height: 100%;
+    padding: 10.1744186vh 5.46875vw;
+    position: absolute;
+}
+
+.svg-wrapper5 {
+    background-position: 0 0;
+    background-size: cover;
+    max-width: 5080px;
+    width:200%;
     height: 100%;
     padding: 10.1744186vh 5.46875vw;
     position: absolute;
