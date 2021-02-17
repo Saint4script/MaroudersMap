@@ -34,14 +34,14 @@
     left: auto;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    display: inline-block; 
+    display: inline-block;
     position: relative;
 }
 
 .person-icon:hover:after {
     content: attr(data-title);
     position: absolute;
-    left: -50%; top: -50%;
+    left: -60%; top: -220%;
     z-index: 4;
     color: #350714;
     font-family: Ubuntu, sans-serif;
