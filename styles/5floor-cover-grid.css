@@ -25,6 +25,85 @@
 }
 
 /* 18 - hall will be later  */
+.cab-18-1-place {
+    grid-area: 10 / 8 / 12 / 10;
+}
+
+.cab-18-2-place {
+    grid-area: 12 / 8 / 15 / 10;
+}
+
+.cab-18-3-place {
+    grid-area: 12 / 10 / 15 / 13;
+}
+
+.cab-18-4-place {
+    grid-area: 12 / 12 / 15 / 15;
+}
+
+.cab-18-5-place {
+    grid-area: 12 / 17 / 15 / 20;
+}
+
+.cab-18-6-place {
+    grid-area: 12 / 20 / 15 / 22;
+}
+
+.cab-18-7-place {
+    grid-area: 12 / 24 / 15 / 27;
+}
+
+.cab-18-8-place {
+    grid-area: 12 / 25 / 15 / 28;
+}
+
+.cab-18-9-place {
+    grid-area: 12 / 29 / 15 / 31;
+}
+
+.cab-18-10-place {
+    grid-area: 12 / 34 / 15 / 36;
+}
+
+.cab-18-11-place {
+    grid-area: 10 / 42 / 13 / 44;
+}
+
+.cab-18-12-place {
+    grid-area: 10 / 47 / 13 / 50;
+}
+
+.cab-18-13-place {
+    grid-area: 8 / 48 / 11 / 51;
+}
+
+.cab-18-14-place {
+    grid-area: 8 / 51 / 11 / 54;
+}
+
+.cab-18-15-place {
+    grid-area: 8 / 55 / 11 / 58;
+}
+
+.cab-18-16-place {
+    grid-area: 7 / 60 / 11 / 63;
+}
+
+.cab-18-17-place {
+    grid-area: 8 / 67 / 11 / 69;
+}
+
+.cab-18-18-place {
+    grid-area: 8 / 69 / 11 / 71;
+}
+
+.cab-18-19-place {
+    grid-area: 8 / 71 / 11 / 73;
+}
+
+.cab-18-20-place {
+    grid-area: 8 / 73 / 11 / 75;
+}
 
 .cab-19-place {
     grid-area: 1 / 32 / 7 / 36;
@@ -56,6 +135,10 @@
 
 .cab-26-place {
     grid-area: 10 / 1 / 24 / 8;
+}
+
+.cab-26-1-place {
+    grid-area: 10 / 1 / 12 / 8;
 }
 
 .cab-27-place {
