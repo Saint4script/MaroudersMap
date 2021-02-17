@@ -223,7 +223,7 @@ class FindShortRoute {
             JSON.stringify(candidateRoutes[candidateRoutes.length - 1])
           ) {
             isFinding = false;
-            console.log("exit repeat route");
+            // console.log("exit repeat route");
           } else {
             candidateRoutes.push([...routes]);
             candidateRoutesFlat = candidateRoutes.flat();

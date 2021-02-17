@@ -6,9 +6,7 @@
     <link rel="icon" href="images/favi.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/svg-styles.css">
     <link rel="stylesheet" href="styles/alt-4floor-cover-grid.css">
-    <link rel="stylesheet" href="styles/4floor-checkpoints.css">
     <link rel="stylesheet" href="styles/5floor-cover-grid.css">
-    <link rel="stylesheet" href="styles/5floor-checkpoints.css">
     <link rel="stylesheet" href="styles/layout.css">
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <title>Marodeur`s Map</title>
@@ -16,18 +14,20 @@
 
 <body class="preview" id="background">
 
-    <!-- <div class="text" id="intro">
+    <!--<div class="footprints">
+        <img src="images/footprints.gif">
+    </div>-->
+
+     <div class="text" id="intro">
         <p> Not everyone can handle with it</p>
         <p> But if try a lot </p>
         <p> You will see</p>
-        <p> That everything is in front of you, just click</p>
-    </div> -->
+        <p> That everything is in front of you</p><br>
+        <p> Just click</p>
+    </div>
 
-<!--  Основной тег, содержащий в себе все элементы для отрисовки карты 4 этажа офиса компании  -->
-<div class="floor-4-wrapper " id="4-floor" >
-    <!--  Покрывающая сетка: Содержит блоки кабинетов, внутри которых располагаются маркеры сотрудников при их появлении,
-          контрольные точки для навигации по этажу  -->
-    <div class="grid-map-floor4 " id="grid-for-help">
+<div class="floor-4-wrapper display" id="4-floor" >
+    <div class="grid-map-floor4 display " id="grid-for-help">
         <div class="cab-1-0-place placeholder"></div>
         <div class="cab-1-1-place placeholder"></div>
         <div class="cab-1-2-place placeholder"></div>
@@ -41,17 +41,18 @@
         <div class="cab-2-1-place placeholder"></div>
         <div class="cab-3-place placeholder"></div>
         <div class="cab-4-place placeholder"></div>
-        <div class="cab-5-place placeholder"></div>
+        <div class="cab-5-place placeholder"><p>Спорт зал</p></div>
         <div class="cab-5-0-place placeholder"></div>
         <div class="cab-5-1-place placeholder"></div>
-        <div class="cab-6-place placeholder"></div>
+        <div class="cab-6-place placeholder"><p>Гардероб</p></div>
         <div class="cab-6-1-place placeholder"></div>
         <div class="cab-7-place placeholder"></div>
-        <div class="cab-8-place placeholder"></div>
+        <div class="cab-8-place placeholder"><p>Переговорка</p></div>
         <div class="cab-9-place placeholder"></div>
-        <div class="cab-10-place placeholder"></div>
+        <div class="cab-10-place placeholder"><p>Конференц-зал</p></div>
+        <div class="cab-10-1-place placeholder"></div>
         <div class="cab-11-place placeholder"></div>
-        <div class="cab-12-place placeholder"></div>
+        <div class="cab-12-place placeholder"><p>HR и бухгалтерия</p></div>
         <div class="cab-12-1-place placeholder"></div>
         <div class="cab-12-2-place placeholder"></div>
         <div class="cab-12-3-place placeholder"></div>
@@ -59,10 +60,8 @@
         <div class="cab-13-place placeholder"></div>
         <div class="cab-14-place placeholder"></div>
         <div class="cab-15-place placeholder"></div>
-        <div class="cab-16-place placeholder"></div>
+        <div class="cab-16-place placeholder"><p>English</p></div>
     </div>
-
-    <!--  Макет карты 4 этажа, тег <g> - отдельный кабинет  -->
         <div class="svg-wrapper">
             <svg viewbox="0 0 1280 680" preserveAspectRatio="none">
     
@@ -162,275 +161,270 @@
             </svg>
         </div>
 
+<!--    <form>-->
+<!--        <div class="from">-->
+<!--            <input type="radio" name="placeFrom" value="cab-1-8-from">-->
+<!--            <label for="cab-1-8">cab-1-8</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-2-from">-->
+<!--            <label for="cab-2">cab-2</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-3-from">-->
+<!--            <label for="cab-3">cab-3</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-4-from">-->
+<!--            <label for="cab-4">cab-4</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-5-from">-->
+<!--            <label for="cab-5">cab-5</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-6-from">-->
+<!--            <label for="cab-6">cab-6</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-7-from">-->
+<!--            <label for="cab-7">cab-7</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-8-from">-->
+<!--            <label for="cab-8">cab-8</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-9-from">-->
+<!--            <label for="cab-9">cab-9</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-10-from">-->
+<!--            <label for="cab-10">cab-10</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-11-from">-->
+<!--            <label for="cab-11">cab-11</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-12-from">-->
+<!--            <label for="cab-12">cab-12</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-13-from">-->
+<!--            <label for="cab-13">cab-13</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-14-from">-->
+<!--            <label for="cab-14">cab-14</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-15-from">-->
+<!--            <label for="cab-15">cab-15</label>-->
+<!--            <input type="radio" name="placeFrom" value="cab-16-from">-->
+<!--            <label for="cab-16">cab-16</label>-->
+<!--        </div>-->
 
-    <form>
-        <div class="from">
-            <input type="radio" name="placeFrom" value="cab-1-8-from">
-            <label for="cab-1-8">cab-1-8</label>
-            <input type="radio" name="placeFrom" value="cab-2-from">
-            <label for="cab-2">cab-2</label>
-            <input type="radio" name="placeFrom" value="cab-3-from">
-            <label for="cab-3">cab-3</label>
-            <input type="radio" name="placeFrom" value="cab-4-from">
-            <label for="cab-4">cab-4</label>
-            <input type="radio" name="placeFrom" value="cab-5-from">
-            <label for="cab-5">cab-5</label>
-            <input type="radio" name="placeFrom" value="cab-6-from">
-            <label for="cab-6">cab-6</label>
-            <input type="radio" name="placeFrom" value="cab-7-from">
-            <label for="cab-7">cab-7</label>
-            <input type="radio" name="placeFrom" value="cab-8-from">
-            <label for="cab-8">cab-8</label>
-            <input type="radio" name="placeFrom" value="cab-9-from">
-            <label for="cab-9">cab-9</label>
-            <input type="radio" name="placeFrom" value="cab-10-from">
-            <label for="cab-10">cab-10</label>
-            <input type="radio" name="placeFrom" value="cab-11-from">
-            <label for="cab-11">cab-11</label>
-            <input type="radio" name="placeFrom" value="cab-12-from">
-            <label for="cab-12">cab-12</label>
-            <input type="radio" name="placeFrom" value="cab-13-from">
-            <label for="cab-13">cab-13</label>
-            <input type="radio" name="placeFrom" value="cab-14-from">
-            <label for="cab-14">cab-14</label>
-            <input type="radio" name="placeFrom" value="cab-15-from">
-            <label for="cab-15">cab-15</label>
-            <input type="radio" name="placeFrom" value="cab-16-from">
-            <label for="cab-16">cab-16</label>
-        </div>
+<!--        <div class="to">-->
+<!--            <input type="radio" name="placeTo" value="cab-1-8-to">-->
+<!--            <label for="cab-1-8">cab-1-8</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-2-to">-->
+<!--            <label for="cab-2">cab-2</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-3-to">-->
+<!--            <label for="cab-3">cab-3</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-4-to">-->
+<!--            <label for="cab-4">cab-4</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-5-to">-->
+<!--            <label for="cab-5">cab-5</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-6-to">-->
+<!--            <label for="cab-6">cab-6</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-7-to">-->
+<!--            <label for="cab-7">cab-7</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-8-to">-->
+<!--            <label for="cab-8">cab-8</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-9-to">-->
+<!--            <label for="cab-9">cab-9</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-10-to">-->
+<!--            <label for="cab-10">cab-10</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-11-to">-->
+<!--            <label for="cab-11">cab-11</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-12-to">-->
+<!--            <label for="cab-12">cab-12</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-13-to">-->
+<!--            <label for="cab-13">cab-13</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-14-to">-->
+<!--            <label for="cab-14">cab-14</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-15-to">-->
+<!--            <label for="cab-15">cab-15</label>-->
+<!--            <input type="radio" name="placeTo" value="cab-16-to">-->
+<!--            <label for="cab-16">cab-16</label>-->
+<!--        </div>-->
 
-        <div class="to">
-            <input type="radio" name="placeTo" value="cab-1-8-to">
-            <label for="cab-1-8">cab-1-8</label>
-            <input type="radio" name="placeTo" value="cab-2-to">
-            <label for="cab-2">cab-2</label>
-            <input type="radio" name="placeTo" value="cab-3-to">
-            <label for="cab-3">cab-3</label>
-            <input type="radio" name="placeTo" value="cab-4-to">
-            <label for="cab-4">cab-4</label>
-            <input type="radio" name="placeTo" value="cab-5-to">
-            <label for="cab-5">cab-5</label>
-            <input type="radio" name="placeTo" value="cab-6-to">
-            <label for="cab-6">cab-6</label>
-            <input type="radio" name="placeTo" value="cab-7-to">
-            <label for="cab-7">cab-7</label>
-            <input type="radio" name="placeTo" value="cab-8-to">
-            <label for="cab-8">cab-8</label>
-            <input type="radio" name="placeTo" value="cab-9-to">
-            <label for="cab-9">cab-9</label>
-            <input type="radio" name="placeTo" value="cab-10-to">
-            <label for="cab-10">cab-10</label>
-            <input type="radio" name="placeTo" value="cab-11-to">
-            <label for="cab-11">cab-11</label>
-            <input type="radio" name="placeTo" value="cab-12-to">
-            <label for="cab-12">cab-12</label>
-            <input type="radio" name="placeTo" value="cab-13-to">
-            <label for="cab-13">cab-13</label>
-            <input type="radio" name="placeTo" value="cab-14-to">
-            <label for="cab-14">cab-14</label>
-            <input type="radio" name="placeTo" value="cab-15-to">
-            <label for="cab-15">cab-15</label>
-            <input type="radio" name="placeTo" value="cab-16-to">
-            <label for="cab-16">cab-16</label>
-        </div>
-
-    <input type="button" class="move" value="move">
-    </form>
-
+<!--    <input type="button" class="move" value="move">-->
+<!--    </form>-->
 </div>
-<!--  Основной тег, содержащий в себе все элементы для отрисовки карты 5 этажа офиса компании  -->
-<div class="floor-5-wrapper " id="5-floor">
-    <div class="floor-5-container">
-        <div class="grid-map-floor5 " id="grid-for-help2">
+
+<div class="floor-5-wrapper existance" id="5-floor">
+    <div class="floor-5-container existance" id="5floor-container">
+        <div class="grid-map-floor5" id="grid-for-help2">
 
             <div class="cab-17-place placeholder"></div>
             <div class="cab-18-place placeholder"></div>
             <div class="cab-19-place placeholder"></div>
             <div class="cab-20-place placeholder"></div>
             <div class="cab-21-place placeholder"></div>
-            <div class="cab-22-place placeholder"></div>
-            <div class="cab-23-place placeholder"></div>
-            <div class="cab-24-place placeholder"></div>
-            <div class="cab-25-place placeholder"></div>
-            <div class="cab-26-place placeholder"></div>
-            <div class="cab-27-place placeholder"></div>
-            <div class="cab-28-place placeholder"></div>
-            <div class="cab-29-place placeholder"></div>
+            <div class="cab-22-place placeholder"><p>Кухня</p></div>
+            <div class="cab-23-place placeholder"><p>Серверная</p></div>
+            <div class="cab-24-place placeholder"><p>Переговорка</p></div>
+            <div class="cab-25-place placeholder"><p>Биздев и маркетинг</p></div>
+            <div class="cab-26-place placeholder"><p>Поддержка</p></div>
+            <div class="cab-27-place placeholder"><p>BILLmanager</p></div>
+            <div class="cab-28-place placeholder"><p>Cartbee</p></div>
+            <div class="cab-29-place placeholder"><p>DevOps</p></div>
             <div class="cab-30-place placeholder"></div>
-            <div class="cab-31-place placeholder"></div>
+            <div class="cab-31-place placeholder"><p>Лаунч</p></div>
             <div class="cab-32-place placeholder"></div>
-            <div class="cab-33-place placeholder"></div>
-            <div class="cab-34-place placeholder"></div>
-            <div class="cab-35-place placeholder"></div>
-            <div class="cab-36-place placeholder"></div>
-            <div class="cab-37-place placeholder"></div>
+            <div class="cab-33-place placeholder"><p>UX I Frontend IAnalitics</p></div>
+            <div class="cab-34-place placeholder"><p>Большая переговорка</p></div>
+            <div class="cab-35-place placeholder"><p>Александр Брюхано (СТО)</p></div>
+            <div class="cab-36-place placeholder"><p>Ольга Сыровацкая (HR)</p></div>
+            <div class="cab-37-place placeholder"><p>Павел Гуральник (SEO)</p></div>
             <div class="cab-38-place placeholder"></div>
-            <div class="cab-39-place placeholder"></div>
-            <div class="cab-40-place placeholder"></div>
-            <div class="cab-41-place placeholder"></div>
-            <div class="cab-42-place placeholder"></div>
-            <div class="cab-43-place placeholder"></div>
+            <div class="cab-39-place placeholder"><p>Переговорка</p></div>
+            <div class="cab-40-place placeholder"><p>VMmanager</p></div>
+            <div class="cab-41-place placeholder"><p>ISPmanager</p></div>
+            <div class="cab-42-place placeholder"><p>Переговорка</p></div>
+            <div class="cab-43-place placeholder"><p>DCImanager</p></div>
         </div>
-    <!--  Макет карты 5 этажа, тег <g> - отдельный кабинет  -->
-    <div class="svg-wrapper5">
-        <svg viewbox="0 0 2560 680" preserveAspectRatio="none">
+        <div class="svg-wrapper5">
+            <svg viewbox="0 0 2560 680" preserveAspectRatio="none">
 
-            <g class="cab" id="cab-17">
-                <path d="m 1125,4 l 250,0 l 0,266" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1125,266 l 190,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1369,266 l 0,-60" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-17">
+                    <path d="m 1125,4 l 250,0 l 0,266" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1125,266 l 190,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1369,266 l 0,-60" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-19">
-                <path d="m 997,4 l 124,0 l 0,321 l -10,0"  stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
-                <path d="m 1110,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-19">
+                    <path d="m 997,4 l 124,0 l 0,321 l -10,0"  stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
+                    <path d="m 1110,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-20">
-                <path d="m 894,4 l 99,0 l 0,174 l 63,0 l 0,117 l -97,0 l 0,30 l -10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 894,325 l 10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 904,325 l 0,-40" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-20">
+                    <path d="m 894,4 l 99,0 l 0,174 l 63,0 l 0,117 l -97,0 l 0,30 l -10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 894,325 l 10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 904,325 l 0,-40" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-21">
-                <path d="m 962,325 l 50,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1056,329 l 0,-30" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1012,325 l 45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-21">
+                    <path d="m 962,325 l 50,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1056,329 l 0,-30" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1012,325 l 45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-22">
-                <path d="m 581,4 l 315,0 l 0,321 l -88,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
-                <path d="m 581,207 l 91,0 l 0,118 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
-                <path d="m 760,326 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-22">
+                    <path d="m 581,4 l 315,0 l 0,321 l -88,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
+                    <path d="m 581,207 l 91,0 l 0,118 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none"/>
+                    <path d="m 760,326 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-23">
-                <path d="m 581,325 l 40,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 667,325 l 10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 667,326 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-23">
+                    <path d="m 581,325 l 40,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 667,325 l 10,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 667,326 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-24">
-                <path d="m 577,210 l 0,119" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 448,325 l 82,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 573,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-24">
+                    <path d="m 577,210 l 0,119" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 448,325 l 82,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 573,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-25">
-                <path d="m 4,4 l 573,0 l 0,203 l -129,0 l 0,118 l -20,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 4,0 l 0,267 l 285,0 l 0,58 l 95,0 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 128,265 l 0,-60 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 256,265 l 0,-60 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 426,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-25">
+                    <path d="m 4,4 l 573,0 l 0,203 l -129,0 l 0,118 l -20,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 4,0 l 0,267 l 285,0 l 0,58 l 95,0 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 128,265 l 0,-60 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 256,265 l 0,-60 " stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 426,325 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-26">
-                <path d="m 4,270 l 0,406 l 221,0 l 0,-360" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 225,273 l -45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-26">
+                    <path d="m 4,270 l 0,406 l 221,0 l 0,-360" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 225,273 l -45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-27">
-                <path d="m 228,414 l 90,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 228,676 l 317,0 l 0,-262 l -179,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 320,414 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-27">
+                    <path d="m 228,414 l 90,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 228,676 l 317,0 l 0,-262 l -179,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 320,414 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-28">
-                <path d="m 548,676 l 189,0 l 0,-202 l -64,0 l 0,-64" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 548,414 l 70,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 667,414 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-28">
+                    <path d="m 548,676 l 189,0 l 0,-202 l -64,0 l 0,-64" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 548,414 l 70,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 667,414 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-29">
-                <path d="m 800,411 l 0,63 l -61,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 740,676 l 190,0 l 0,-261 l -86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 806,413 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-29">
+                    <path d="m 800,411 l 0,63 l -61,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 740,676 l 190,0 l 0,-261 l -86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 806,413 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-31">
-                <path d="m 933,415 l 130,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 933,676 l 604,0 l 0,-203 l -160,0 l 0,-60" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-31">
+                    <path d="m 933,415 l 130,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 933,676 l 604,0 l 0,-203 l -160,0 l 0,-60" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-32">
-                <path d="m 1377,413 l 0,-59 l 120,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1531,356 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-32">
+                    <path d="m 1377,413 l 0,-59 l 120,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1531,356 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-33">
-                <path d="m 1378,4 l 478,0 l 0,203 l -275,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1378,207 l 151,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1760,4 l 0,100" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1760,207 l 0,-50" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1579,207 l 0,-60" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-                <path d="m 1759,104 l 40,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-33">
+                    <path d="m 1378,4 l 478,0 l 0,203 l -275,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1378,207 l 151,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1760,4 l 0,100" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1760,207 l 0,-50" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1579,207 l 0,-60" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                    <path d="m 1759,104 l 40,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-34">
-                <path d="m 1859,4 l 220,0 l 0,173 l -116,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1859,177 l 54,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1913,177 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-34">
+                    <path d="m 1859,4 l 220,0 l 0,173 l -116,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1859,177 l 54,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1913,177 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-35">
-                <path d="m 2079,4 l 161,0 l 0,210" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2079,169 l 0,38 l 113,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2235,212 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-35">
+                    <path d="m 2079,4 l 161,0 l 0,210" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2079,169 l 0,38 l 113,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2235,212 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-36">
-                <path d="m 2240,4 l 127,0 l 0,204 l -80,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2245,212 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-36">
+                    <path d="m 2240,4 l 127,0 l 0,204 l -80,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2245,212 l 0,-45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-37">
-                <path d="m 2367,4 l 189,0 l 0,293 l -188,0 l 0,-25" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2367,207 l 0,20" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2368,272 l 45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-37">
+                    <path d="m 2367,4 l 189,0 l 0,293 l -188,0 l 0,-25" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2367,207 l 0,20" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2368,272 l 45,0" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-38">
-                <path d="m 1537,297 l 0,200" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1533,297 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1537,676 l 255,0 l 0,-260 l -127,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1659,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-38">
+                    <path d="m 1537,297 l 0,200" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1533,297 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1537,676 l 255,0 l 0,-260 l -127,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1659,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-39">
-                <path d="m 1669,297 l 85,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-39">
+                    <path d="m 1669,297 l 85,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-40">
-                <path d="m 1796,676 l 252,0 l 0,-379 l -90,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1795,297 l 110,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1792,293 l 0,150" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 1956,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-40">
+                    <path d="m 1796,676 l 252,0 l 0,-379 l -90,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1795,297 l 110,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1792,293 l 0,150" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 1956,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-41">
-                <path d="m 2045,297 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2049,676 l 223,0 l 0,-260 l -97,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2169,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-41">
+                    <path d="m 2045,297 l 86,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2049,676 l 223,0 l 0,-260 l -97,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2169,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-42">
-                <path d="m 2216,297 l 88,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2181,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-42">
+                    <path d="m 2216,297 l 88,0" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2181,295 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-            <g class="cab" id="cab-43">
-                <path d="m 2276,676 l 280,0 l 0,-380" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2276,416 l 29,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
-                <path d="m 2310,297 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
-            </g>
+                <g class="cab" id="cab-43">
+                    <path d="m 2276,676 l 280,0 l 0,-380" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2276,416 l 29,0 l 0,-123" stroke="var(--wall)" stroke-width="var(--wall-thickness)" fill="none" />
+                    <path d="m 2310,297 l 0,45" stroke="var(--door)" stroke-width="var(--door-thickness)" fill="none" />
+                </g>
 
-        </svg>
+            </svg>
+        </div>
     </div>
 </div>
 
-
-
-<script src="scripts/paths.js"></script>
 <script src="scripts/path-4-floor.js"></script>
 <script src="scripts/layout-script.js"></script>
 </body>

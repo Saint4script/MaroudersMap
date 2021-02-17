@@ -16,9 +16,15 @@
     --back-image: url("../images/intro.jpg");
 }
 
+
 @font-face {
     font-family: MedievalSharp;
     src: url('../font/MedievalSharp-Regular.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("../font/Ubuntu-Medium.ttf");
 }
 
 
@@ -35,20 +41,24 @@
     background: var(--back-image);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+
 }
 
 .floor-4-map-display {
-    transition:  ease-in-out 3s;
+    transition:  ease-in-out 2s;
 }
 
 .map-texture {
-    --back-image: url("../images/perfect.jpg");
-    background-size: 100% 100%;
+    --back-image: url("../images/map-texture.jpg");
     transition:  ease-in-out 2s;
 }
 
 .display {
     opacity: 0;
+}
+
+.existance {
+    display: none !important;
 }
 
 .text {
@@ -93,28 +103,4 @@
     100% {
         opacity: 0;
     }
-}
-
-
-/*  ===============================   */
-/*  Классы дополнительных элементов   */
-/*  ===============================   */
-
-form {
-    z-index: 100;
-    width: 35vw;
-    display: flex;
-    background-color: green;
-    position: fixed;
-    opacity: 0.8;
-}
-
-form button {
-    width: 50px;
-    height: 35px;
-    border-radius: 50%;
-    display: inline-block;
-}
-.to {
-    margin-left:50px
 }

@@ -31,10 +31,100 @@
 }
 
 .cab-20-place {
-    grid-area: 1 / 29 / 9 / 32;
+    grid-area: 1 / 29 / 11 / 32;
 }
 
+.cab-21-place {
+    grid-area: 11 / 31 / 12 / 34;
+}
 
+.cab-22-place {
+    grid-area: 1 / 19 / 8 / 29;
+}
+
+.cab-23-place {
+    grid-area: 8 / 19 / 12 / 22;
+}
+
+.cab-24-place {
+    grid-area: 8 / 15 / 12 / 19;
+}
+
+.cab-25-place {
+    grid-area: 1 / 1 / 8 / 19;
+}
+
+.cab-26-place {
+    grid-area: 10 / 1 / 24 / 8;
+}
+
+.cab-27-place {
+    grid-area: 15 / 8 / 24 / 18;
+}
+
+.cab-28-place {
+    grid-area: 17 / 18 / 24 / 24;
+}
+
+.cab-29-place {
+    grid-area: 17 / 24 / 24 / 30;
+}
+
+.cab-30-place {
+    grid-area: 15 / 22 / 17 / 26;
+}
+
+.cab-31-place {
+    grid-area: 17 / 30 / 24 / 49;
+}
+
+.cab-32-place {
+    grid-area: 13 / 44 / 17 / 49;
+}
+
+.cab-33-place {
+    grid-area: 1 / 44 / 8 / 59;
+}
+
+.cab-34-place {
+    grid-area: 1 / 59 / 7 / 66;
+}
+
+.cab-35-place {
+    grid-area: 1 / 66 / 8 / 71;
+}
+
+.cab-36-place {
+    grid-area: 1 / 71 / 8 / 75;
+}
+
+.cab-37-place {
+    grid-area: 1 / 75 / 11 / 81;
+}
+
+.cab-38-place {
+    grid-area: 15 / 49 / 24 / 57;
+}
+
+.cab-39-place {
+    grid-area: 11 / 53 / 15 / 57;
+}
+
+.cab-40-place {
+    grid-area: 11 / 57 / 24 / 65;
+}
+
+.cab-41-place {
+    grid-area: 15 / 65 / 24 / 72;
+}
+
+.cab-42-place {
+    grid-area: 11 / 69 / 15 / 73;
+}
+
+.cab-43-place {
+    grid-area: 11 / 73 / 24 / 81;
+}
 © 2021 GitHub, Inc.
 Terms
 Privacy

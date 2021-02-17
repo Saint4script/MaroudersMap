@@ -10,20 +10,46 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    color: white;
-    padding: 0.5em;
+    /* padding: 0.5em; */
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    /* position: relative; */
+}
+
+.placeholder p {
+    position: absolute;
+    color: #350714;
+    font-size: 1.15vw;
+    font-family: "Ubuntu", sans-serif;
+    word-wrap: normal;
+    text-align: center;
 }
 
 .person-icon {
-    background-color: black;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     margin: 0.2em;
     left: auto;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline-block; /* Строчно-блочный элемент */
+    position: relative;
+}
+
+.person-icon:hover:after {
+    content: attr(data-title); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    left: -50%; top: -50%; /* Положение подсказки */
+    z-index: 4; /* Отображаем подсказку поверх других элементов */
+    /*background: rgba(255, 255, 230, 0.9); !* Полупрозрачный цвет фона *!*/
+    color: #350714;
+    font-family: Ubuntu, sans-serif; /* Гарнитура шрифта */
+    font-size: 14px; /* Размер текста подсказки */
+    text-align: center;
+    padding: 5px 10px; /* Поля */
+    border: 1px solid #333;
 }
 
 .checkpoint {
@@ -42,6 +68,11 @@
 
 body {
     overflow-x: hidden;
+    overflow: overlay;
+}
+
+.footprints {
+    position: absolute;
 }
 
 .floor-4-wrapper {
@@ -50,7 +81,7 @@ body {
     height: 100vh;
     position: relative;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .floor-5-wrapper {
@@ -61,7 +92,8 @@ body {
     overflow-x: scroll;
     overflow-y: hidden;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
+    overflow: overlay;
 }
 
 .floor-5-container {
@@ -71,29 +103,24 @@ body {
 
 body::-webkit-scrollbar {
     width: 45px;
-}
 
-body::-webkit-scrollbar-track {
-    background-image: url("../images/scroll-track.jpg");
-    background-repeat: no-repeat;
 }
 
 body::-webkit-scrollbar-thumb {
     background-image: url("../images/scroll.png");
+    background-size: auto 100%;
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
 }
 
-/* Кастомизация нижнего скролла, нужна ли? */
-/*.floor-5-wrapper::-webkit-scrollbar {
-    height: 45px;
+.floor-5-wrapper::-webkit-scrollbar {
+    height: 20px;
 }
 .floor-5-wrapper::-webkit-scrollbar-thumb {
-    background-image: url("../images/scroll-x.png");
-    background-repeat: no-repeat;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #350714, #072153);
+
+
 }
-.floor-5-wrapper::-webkit-scrollbar-track {
-    background-image: url("../images/scroll-track-x.jpg");
-    background-repeat: no-repeat;
-}*/
 
 .svg-wrapper {
     background-position: 0 0;
