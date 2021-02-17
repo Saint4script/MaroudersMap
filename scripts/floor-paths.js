@@ -34,7 +34,28 @@ const APItoLayoutMap = {
     "134877" : {
         "publicName": "выход совсем", 
         "layoutName": "???"// уходит вникуда----------------------------------------------
-    }
+    },
+    "7027" : {
+        "publicName": "Каб 25 (BDSM)", 
+        "layoutName": "cab-25-place"
+    },
+    "9260" : {
+        "publicName": "Каб 26 (Support)", 
+        "layoutName": "cab-25-place"
+    },
+    "9579" : {
+        "publicName": "Каб 27 (BILLmanager big)", 
+        "layoutName": "cab-27-place"
+    },
+    "33755" : {
+        "publicName": "Каб 28 (BILLmanager small)", 
+        "layoutName": "cab-28-place"
+    },
+    "8622" : {
+        "publicName": "Каб 29 (DevOps)", 
+        "layoutName": "cab-29-place"
+    },
+
 };
 
 const roomMap = {

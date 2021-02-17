@@ -318,6 +318,7 @@ function movePerson(who, from, to) {
         // в то время как timePassed идёт от 0 до 2000
         // opacity изменяет значение от 1 до 0
         function draw_start(timePassed) {
+            console.log(JQ_who[0]);
             JQ_who[0].style.opacity = (1 - (timePassed / 20 / 100));
         }
 
@@ -354,6 +355,58 @@ function movePerson(who, from, to) {
     Cabinet.to = false;
 }
 
+function disappear(personHTML) {
+
+    // место для анимации
+    let start = Date.now(); // запомнить время начала
+
+    let timer_ = setInterval(function () {
+        
+        let timePassed = Date.now() - start;
+
+        if (timePassed >= 2000) {
+            clearInterval(timer_);
+            // удаление html-элемента
+            personHTML = $(personHTML).detach();
+            return;
+        }
+
+        // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+        draw_start(timePassed);
+    }, 20);
+
+    // в то время как timePassed идёт от 0 до 2000
+    // opacity изменяет значение от 1 до 0
+    function draw_start(timePassed) {
+        personHTML.style.opacity = (1 - (timePassed / 20 / 100));
+    }
+}
+
+function appear(personHTML) {
+
+    // место для анимации
+    let start = Date.now(); // запомнить время начала
+
+    let timer_ = setInterval(function () {
+        
+        let timePassed = Date.now() - start;
+
+        if (timePassed >= 2000) {
+            clearInterval(timer_);
+            return;
+        }
+
+        // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+        draw_start(timePassed);
+    }, 20);
+
+    // в то время как timePassed идёт от 0 до 2000
+    // opacity изменяет значение от 1 до 0
+    function draw_start(timePassed) {
+        personHTML.style.opacity = (0 + (timePassed / 20 / 100));
+    }
+}
+
 //добавить анимацию появления
 function addNewPersonToMap(person) {
 
@@ -363,23 +416,85 @@ function addNewPersonToMap(person) {
 
     let personHTML = document.createElement('div');
     personHTML.setAttribute("class", "person-icon");
-    // personHTML.style = "background-color: " + randomColor();
-    personHTML.setAttribute("data-title", "My name is Pupunya");
-        // перебираем
-    Fullname = "kfc" // допустим получили ФИО из класса, в котором хранится эта иинформация
-    personHTML.style.backgroundImage= "url(http://127.0.0.1:8080/images/worker-icons/" + Fullname + ".jpg)";
+    personHTML.setAttribute("data-title", person.fullName);
+    // перебираем
+    FullnameArray = person.fullName.split(" ");
+    FullName = "";
+    FullnameArray.forEach((elem) => {
+        FullName += elem;
+    })
 
-    person.html = personHTML;
-    PERSONS.push(person);
+    try {
+        // как убрать вывод ошибок??????
+        fetch("http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg", { mode: 'same-origin' })
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Image not found, error code: ' + response.status);
 
-    destinationPlaceholder.appendChild(personHTML);
+                    personHTML.style = "background-color: " + randomColor() + ";";
+                    personHTML.style.opacity = 0;
+                    person.html = personHTML;
+                    PERSONS.push(person);
+
+                    destinationPlaceholder.appendChild(personHTML);
+                    appear(person.html);
+                    return;
+                }
+
+                let path_ = "url(http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg)";
+                // console.log(path_)
+                personHTML.style.backgroundImage = path_;
+                person.html = personHTML;
+                PERSONS.push(person);
+
+                destinationPlaceholder.appendChild(personHTML);
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+    } catch (error) {
+        personHTML.style = "background-color: " + randomColor() + ";";
+        person.html = personHTML;
+        PERSONS.push(person);
+        // console.log(error)
+        destinationPlaceholder.appendChild(personHTML);
+    }
 }
 
 function deletePerson(person) {
     PERSONS = PERSONS.filter(person_ => person.ID != person_.ID);
     // запуск анимации исчезновения
 
-    // удаление html-элемента
+    JQ_who = $(person.html)[0];
+    // console.log(JQ_who);
+
+    // // место для анимации
+    // let start = Date.now(); // запомнить время начала
+
+    // let timer_ = setInterval(function () {
+        
+    //     let timePassed = Date.now() - start;
+
+    //     if (timePassed >= 2000) {
+    //         clearInterval(timer_);
+    //         // удаление html-элемента
+    //         JQ_who = $(person.html).detach();
+    //         return;
+    //     }
+
+    //     // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+    //     draw_start(timePassed);
+    // }, 20);
+
+    // // в то время как timePassed идёт от 0 до 2000
+    // // opacity изменяет значение от 1 до 0
+    // function draw_start(timePassed) {
+    //     // console.log(JQ_who[0].style);
+    //     JQ_who.style.opacity = (1 - (timePassed / 20 / 100));
+    // }
+    disappear(JQ_who);
 }
 
 function randomColor() {
