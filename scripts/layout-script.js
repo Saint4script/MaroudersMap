@@ -407,7 +407,6 @@ function appear(personHTML) {
     }
 }
 
-//добавить анимацию появления
 function addNewPersonToMap(person) {
 
     let strCabID = APItoLayoutMap[person.location].layoutName;
@@ -443,12 +442,13 @@ function addNewPersonToMap(person) {
                 }
 
                 let path_ = "url(http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg)";
-                // console.log(path_)
                 personHTML.style.backgroundImage = path_;
                 person.html = personHTML;
-                PERSONS.push(person);
+                personHTML.style.opacity = 0;
 
+                PERSONS.push(person);
                 destinationPlaceholder.appendChild(personHTML);
+                appear(person.html);
             }
         )
         .catch(function (err) {
@@ -456,10 +456,12 @@ function addNewPersonToMap(person) {
         });
     } catch (error) {
         personHTML.style = "background-color: " + randomColor() + ";";
+        personHTML.style.opacity = 0;
         person.html = personHTML;
+
         PERSONS.push(person);
-        // console.log(error)
         destinationPlaceholder.appendChild(personHTML);
+        appear(person.html);
     }
 }
 
@@ -502,7 +504,6 @@ function randomColor() {
     return "#" + Number(number).toString(16)
 }
 
-//пока не написана
 function personOnChangeState(person, from, to) {
 
     let strCabIDStart = APItoLayoutMap[from].layoutName;
@@ -546,16 +547,11 @@ $(document).ready(() => {
     initPersons();
 
     let timerId = setInterval(() => {
-        doSome();
-        // console.log(PERSONS);
+        checkPersonsStateChange();
     }, 5000);
-    // setTimeout(() => { 
-    //     clearInterval(timerId); 
-    //     // alert('stop'); 
-    // }, 16000);
 })
 
-async function doSome() {
+async function checkPersonsStateChange() {
 
     await getStateDiffs().then(changedData => {
         if (changedData.length != 0) {
