@@ -55,7 +55,46 @@ const APItoLayoutMap = {
         "publicName": "Каб 29 (DevOps)", 
         "layoutName": "cab-29-place"
     },
-
+    "34080" : {
+        "publicName": "Каб 33.1 (Design)", 
+        "layoutName": "cab-33-place"
+    },
+    "10542" : {
+        "publicName": "Каб 35 (Greed)", 
+        "layoutName": "cab-35-place"
+    },
+    "9898" : {
+        "publicName": "Каб 36 (Olga)", 
+        "layoutName": "cab-36-place"
+    },
+    "????????????????????????????????????????????????????????????????????" : {
+        "publicName": "Каб 37 (SEO)", 
+        "layoutName": "cab-37-place"
+    },
+    "11180" : {
+        "publicName": "Каб 38 (English)", 
+        "layoutName": "cab-38-place"
+    },
+    "5113" : {
+        "publicName": "Каб 39 (Talk склад)", 
+        "layoutName": "cab-39-place"
+    },
+    "5432" : {
+        "publicName": "Каб 40 (VMmanager)", 
+        "layoutName": "cab-40-place"
+    },
+    "6389" : {
+        "publicName": "Каб 41 (Cartbee)", 
+        "layoutName": "cab-41-place"
+    },
+    "6708" : {
+        "publicName": "Каб 42 (Talk)", 
+        "layoutName": "cab-42-place"
+    },
+    "10217" : {
+        "publicName": "Каб 43 (DCI)", 
+        "layoutName": "cab-43-place"
+    }
 };
 
 const roomMap = {
