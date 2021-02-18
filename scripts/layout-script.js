@@ -3,6 +3,8 @@ const HEI = 688;// высота
 CABINETS = [];
 CHECKPOINTS = [];
 PERSONS = [];
+FETCH_PATH = "http://itools.ispsystem.net/door/location?json"; //fetch(FETCH_PATH, { mode: 'same-origin' })
+// FETCH_PATH = "http://127.0.0.1:8080/location.json?=";
 
 // СДЕЛАТЬ АНИМАЦИЮ ИСЧЕЗНОВЕНИЯ ЭЛЕМЕНТА ПОСЛЕ ПРИХОДА В КОНЕЧНУЮ ТОЧКУ И ПЕРЕД АТТАЧЕМ
 
@@ -28,7 +30,7 @@ function isPersonIn(personID) {
 }
 
 function initPersons() {
-    fetch("http://127.0.0.1:8080/location.json", { mode: 'same-origin' })
+    fetch(FETCH_PATH, { mode: 'same-origin' })
         .then(
             function (response) {
                 if (response.status !== 200) {
@@ -36,7 +38,7 @@ function initPersons() {
                         response.status);
                     return;
                 }
-                // Examine the text in the response  
+                // Examine the text in the response
                 response.json().then((data) => {
                     let keys = Object.keys(data);
 
@@ -63,7 +65,7 @@ async function getStateDiffs() {
     //http-request cash reboot
     let timeStamp = Date.now();
 
-    let inner = await fetch("http://127.0.0.1:8080/location.json?=" + timeStamp, { mode: 'same-origin' });
+    let inner = await fetch(FETCH_PATH + timeStamp, { mode: 'same-origin' });
     let data = await inner.json();
 
     let keys = Object.keys(data);
@@ -156,6 +158,7 @@ function initCabinets() {
 function movePerson(who, from, to) {
 
     let path = [];
+    // console.log(from)
 
     let routeFinder = new FindShortRoute(roomMap);
     let pathStringsID = routeFinder.findRoute(from, to);
@@ -165,14 +168,16 @@ function movePerson(who, from, to) {
     });
 
     let x = $(who)[0].offsetLeft;
-
     let y = $(who)[0].offsetTop;
-    let JQ_who = $(who).detach();
 
-    JQ_who.appendTo($('.floor-4-wrapper'));
+    let JQ_who = $(who).detach();
+    JQ_who[0].style.position = "fixed";
+
+    JQ_who.appendTo($('.preview'));
+
     JQ_who.offset({
-        left: x,
-        top: y
+        left: x - document.getElementsByClassName("floor-5-wrapper")[0].scrollLeft,
+        top: y + window.scrollY
     });
 
     function animate({ timing, draw, duration }) {
@@ -233,8 +238,10 @@ function movePerson(who, from, to) {
             // save context for call next()
             const self = this;
             let nextCoordinates = destinationPoint.getBoundingClientRect();
-            let x = nextCoordinates.x / 1;
-            let y = nextCoordinates.y / 1;
+            let x = nextCoordinates.x;
+            let y = nextCoordinates.y + 0;//window.pageYOffset
+            console.log("Next x: ", x)
+            // console.log("next coords: ", nextCoordinates.y, " offY: ", window.pageYOffset);
             let correctionX = destinationPoint.offsetWidth / 2;
             let correctionY = destinationPoint.offsetHeight / 2;
 
@@ -252,9 +259,11 @@ function movePerson(who, from, to) {
                     const left = parseInt(node.style.left) || 0;
                     //calculate transition
                     const xTrans = (x - left + correctionX - 10);
+                    console.log("transX: ", xTrans, " left: ", left)
                     const yTrans = (y - top + correctionY - 10);
+                    // console.log(yTrans)
                     node.style.transform = `translate3d(${progress * (xTrans)
-                        }px, ${progress * (yTrans)}px, 0)`;
+                    }px, ${progress * (yTrans)}px, 0)`;
                     if (progress === 1) {
                         // set finish position, reset transition
                         node.style.top = `${y + correctionY - 10}px`;
@@ -290,7 +299,7 @@ function movePerson(who, from, to) {
     const moveClass = new Move(JQ_who[0]);
 
     moveClass.doneCallback = () => {
-
+        JQ_who[0].style.position = "relative";
         JQ_who = $(JQ_who[0]).detach();
 
         JQ_who.appendTo($("." + path[path.length - 1].classList[0]));
@@ -302,7 +311,7 @@ function movePerson(who, from, to) {
         let start = Date.now(); // запомнить время начала
 
         let timer_ = setInterval(function () {
-            
+
             let timePassed = Date.now() - start;
 
             if (timePassed >= 2000) {
@@ -318,17 +327,15 @@ function movePerson(who, from, to) {
         // в то время как timePassed идёт от 0 до 2000
         // opacity изменяет значение от 1 до 0
         function draw_start(timePassed) {
-            console.log(JQ_who[0]);
             JQ_who[0].style.opacity = (1 - (timePassed / 20 / 100));
         }
 
         let startOpacityAnimation = () => {
-            
 
             start = Date.now(); // запомнить время начала
 
             timer_ = setInterval(function () {
-               
+
                 let timePassed = Date.now() - start;
 
                 if (timePassed >= 2000) {
@@ -361,7 +368,7 @@ function disappear(personHTML) {
     let start = Date.now(); // запомнить время начала
 
     let timer_ = setInterval(function () {
-        
+
         let timePassed = Date.now() - start;
 
         if (timePassed >= 2000) {
@@ -388,11 +395,12 @@ function appear(personHTML) {
     let start = Date.now(); // запомнить время начала
 
     let timer_ = setInterval(function () {
-        
+
         let timePassed = Date.now() - start;
 
         if (timePassed >= 2000) {
             clearInterval(timer_);
+            personHTML.style.opacity = 1;
             return;
         }
 
@@ -426,34 +434,34 @@ function addNewPersonToMap(person) {
     try {
         // как убрать вывод ошибок??????
         fetch("http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg", { mode: 'same-origin' })
-        .then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log('Image not found, error code: ' + response.status);
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.log('Image not found, error code: ' + response.status);
 
-                    personHTML.style = "background-color: " + randomColor() + ";";
-                    personHTML.style.opacity = 0;
+                        personHTML.style = "background-color: " + randomColor() + ";";
+                        personHTML.style.opacity = 0;
+                        person.html = personHTML;
+                        PERSONS.push(person);
+
+                        destinationPlaceholder.appendChild(personHTML);
+                        appear(person.html);
+                        return;
+                    }
+
+                    let path_ = "url(http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg)";
+                    personHTML.style.backgroundImage = path_;
                     person.html = personHTML;
-                    PERSONS.push(person);
+                    personHTML.style.opacity = 0;
 
+                    PERSONS.push(person);
                     destinationPlaceholder.appendChild(personHTML);
                     appear(person.html);
-                    return;
                 }
-
-                let path_ = "url(http://127.0.0.1:8080/images/worker-icons/" + FullName + ".jpg)";
-                personHTML.style.backgroundImage = path_;
-                person.html = personHTML;
-                personHTML.style.opacity = 0;
-
-                PERSONS.push(person);
-                destinationPlaceholder.appendChild(personHTML);
-                appear(person.html);
-            }
-        )
-        .catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
     } catch (error) {
         personHTML.style = "background-color: " + randomColor() + ";";
         personHTML.style.opacity = 0;
@@ -476,7 +484,7 @@ function deletePerson(person) {
     // let start = Date.now(); // запомнить время начала
 
     // let timer_ = setInterval(function () {
-        
+
     //     let timePassed = Date.now() - start;
 
     //     if (timePassed >= 2000) {
@@ -548,6 +556,7 @@ $(document).ready(() => {
 
     let timerId = setInterval(() => {
         checkPersonsStateChange();
+        // console.log(window.pageYOffset);
     }, 5000);
 })
 

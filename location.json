@@ -40,9 +40,17 @@
         "location": "\u0432\u044b\u0445\u043e\u0434 4"
     },
     "153986": {
-        "config_tree_id": 5751,
+        "config_tree_id": 6070,
         "display_name": "\u0421\u0447\u0438\u0442\u044b\u0432\u0430\u0442\u0435\u043b\u044c \u21162",
         "full_fio": "\u0413\u0430\u043b\u0435\u0435\u0432 \u042e\u0440\u0438\u0439 ",
+        "last_date": "2021-02-11",
+        "last_time": "10:47:05",
+        "location": "\u0432\u044b\u0445\u043e\u0434 5"
+    },
+    "9945": {
+        "config_tree_id": 6389,
+        "display_name": "\u0421\u0447\u0438\u0442\u044b\u0432\u0430\u0442\u0435\u043b\u044c \u21162",
+        "full_fio": "\u0413\u0430\u043b\u0435\u0435\u0432 \u042e\u0440\u0438\u0439 6389",
         "last_date": "2021-02-11",
         "last_time": "10:47:05",
         "location": "\u0432\u044b\u0445\u043e\u0434 5"

@@ -14,10 +14,34 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    /* position: relative; */
+    /* иначе текст не перносится*/
+    /*position: relative;*/
 }
 
 .placeholder p {
+    position: absolute;
+    color: #350714;
+    font-size: 1.15vw;
+    font-family: "Ubuntu", sans-serif;
+    word-wrap: normal;
+    text-align: center;
+}
+
+.correct-place {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* padding: 0.5em; */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* иначе текст не перносится*/
+    position: relative;
+}
+
+.correct-place p {
     position: absolute;
     color: #350714;
     font-size: 1.15vw;
@@ -41,14 +65,14 @@
 .person-icon:hover:after {
     content: attr(data-title);
     position: absolute;
-    left: -60%; top: -220%;
+    left: -80%; top: -120%;
     z-index: 4;
     color: #350714;
     font-family: Ubuntu, sans-serif;
     font-size: 14px;
     text-align: center;
     padding: 5px 10px;
-    border: 1px solid #333;
+    /*border: 1px solid #333;*/
 }
 
 .checkpoint {
